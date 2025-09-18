@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitalwerft IT – Webseiten & PC-Reparaturen</title>
+    <meta name="description" content="Digitalwerft IT erstellt moderne Webseiten, repariert Computer und bietet individuelle PC-Konfigurationen für Unternehmen und Privatkunden.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="hero" id="top">
+        <nav class="nav" aria-label="Hauptnavigation">
+            <a class="nav__logo" href="#top" aria-label="Digitalwerft IT Startseite">Digitalwerft<span>IT</span></a>
+            <button class="nav__toggle" aria-expanded="false" aria-controls="navigation-links">
+                <span class="nav__toggle-line"></span>
+                <span class="nav__toggle-line"></span>
+                <span class="nav__toggle-line"></span>
+                <span class="visually-hidden">Menü öffnen</span>
+            </button>
+            <ul class="nav__links" id="navigation-links">
+                <li><a href="#services">Leistungen</a></li>
+                <li><a href="#shop">PC-Konfigurator</a></li>
+                <li><a href="#workflow">Ablauf</a></li>
+                <li><a href="#testimonials">Kunden</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </nav>
+        <div class="hero__content">
+            <div class="hero__text">
+                <p class="hero__eyebrow">Ihr Partner für digitale Infrastruktur</p>
+                <h1>Webseiten & IT-Service, die Ihr Business nach vorne bringen.</h1>
+                <p class="hero__description">
+                    Wir planen, entwickeln und betreuen performante Websites, reparieren Ihre PCs und konfigurieren individuelle Systeme – alles aus einer Hand.
+                </p>
+                <div class="hero__actions">
+                    <a class="button button--primary" href="#contact">Kostenloses Erstgespräch</a>
+                    <a class="button button--ghost" href="#shop">Konfigurator öffnen</a>
+                </div>
+                <dl class="hero__metrics">
+                    <div>
+                        <dt>250+</dt>
+                        <dd>realisierte Webseiten</dd>
+                    </div>
+                    <div>
+                        <dt>98%</dt>
+                        <dd>Reparaturen innerhalb von 48 Stunden</dd>
+                    </div>
+                    <div>
+                        <dt>4.9 ★</dt>
+                        <dd>Zufriedene Kundenbewertungen</dd>
+                    </div>
+                </dl>
+            </div>
+            <div class="hero__card" role="presentation">
+                <div class="hero__card-header">
+                    <p>Aktuelle Projekte</p>
+                    <span>Live-Monitoring</span>
+                </div>
+                <ul class="hero__card-list">
+                    <li>
+                        <p>Relaunch: Agentur Meier</p>
+                        <span>CMS & Hosting</span>
+                    </li>
+                    <li>
+                        <p>Gaming-PC "Vulcan"</p>
+                        <span>RTX 4070 · Lieferbereit</span>
+                    </li>
+                    <li>
+                        <p>Onsite-Service Stadtwerke</p>
+                        <span>24/7 Bereitschaft</span>
+                    </li>
+                </ul>
+                <div class="hero__card-footer">
+                    <strong>Service-Level: Premium</strong>
+                    <p>Reaktionszeit &lt; 2 Std.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section" id="services">
+            <div class="container">
+                <span class="section__eyebrow">Unsere Leistungen</span>
+                <h2>Alles, was moderne IT braucht.</h2>
+                <p class="section__intro">Von der ersten Idee bis zum laufenden Betrieb begleiten wir Unternehmen, Selbstständige und Vereine bei ihrer digitalen Transformation.</p>
+                <div class="grid grid--services">
+                    <article class="card">
+                        <div class="card__icon" aria-hidden="true">💡</div>
+                        <h3>Webseiten & Portale</h3>
+                        <p>Individuelle Unternehmensseiten, Online-Shops und Landingpages mit Fokus auf Performance und Conversion. Inklusive Hosting, Wartung und SEO.</p>
+                        <ul class="card__list">
+                            <li>UX-Workshops & Content</li>
+                            <li>Headless & CMS-Lösungen</li>
+                            <li>PageSpeed-Optimierung</li>
+                        </ul>
+                    </article>
+                    <article class="card">
+                        <div class="card__icon" aria-hidden="true">🛠️</div>
+                        <h3>PC-Reparaturen</h3>
+                        <p>Schnelle Fehleranalyse, Hardware-Tausch, Datenrettung und Reinigung. Wir reparieren direkt vor Ort oder in unserer hauseigenen Werkstatt.</p>
+                        <ul class="card__list">
+                            <li>Express-Service innerhalb 24h</li>
+                            <li>Leihgeräte und Vor-Ort-Service</li>
+                            <li>Transparente Festpreise</li>
+                        </ul>
+                    </article>
+                    <article class="card">
+                        <div class="card__icon" aria-hidden="true">🤝</div>
+                        <h3>Managed IT</h3>
+                        <p>Monitoring, Sicherheitskonzepte und Helpdesk. Wir übernehmen die vollständige Betreuung Ihrer Systeme – inklusive Cloud- und Backup-Strategien.</p>
+                        <ul class="card__list">
+                            <li>Proaktive Wartung & Monitoring</li>
+                            <li>Microsoft 365 & Cloud-Integration</li>
+                            <li>Managed Security & Schulungen</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section--highlight" id="shop">
+            <div class="container container--split">
+                <div class="section__content">
+                    <span class="section__eyebrow">PC-Konfigurator</span>
+                    <h2>Stellen Sie Ihr perfektes System zusammen.</h2>
+                    <p>
+                        Ob leistungsstarker Gaming-Rechner, effiziente Business-Workstation oder kreative Medienmaschine – unser Konfigurator zeigt Ihnen passende Komponenten und kalkuliert den Preis in Echtzeit. Auf Wunsch übernehmen wir Aufbau, Installation und Service.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Individuelle Empfehlungen nach Einsatzzweck</li>
+                        <li>Übersichtliche Preisberechnung</li>
+                        <li>Optionaler Vor-Ort-Service & Wartungspakete</li>
+                    </ul>
+                </div>
+                <div class="configurator" aria-labelledby="configurator-heading">
+                    <h3 id="configurator-heading">Ihre Wunschkonfiguration</h3>
+                    <form id="config-form" class="configurator__form">
+                        <div class="form-row">
+                            <label for="scenario">Einsatzgebiet</label>
+                            <select id="scenario" name="scenario">
+                                <option value="custom">Eigene Auswahl</option>
+                                <option value="office">Büro &amp; Business</option>
+                                <option value="gaming">Gaming &amp; Streaming</option>
+                                <option value="creator">Bild- &amp; Videobearbeitung</option>
+                            </select>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-row">
+                                <label for="cpu">Prozessor</label>
+                                <select id="cpu" name="cpu"></select>
+                            </div>
+                            <div class="form-row">
+                                <label for="gpu">Grafikkarte</label>
+                                <select id="gpu" name="gpu"></select>
+                            </div>
+                            <div class="form-row">
+                                <label for="ram">Arbeitsspeicher</label>
+                                <select id="ram" name="ram"></select>
+                            </div>
+                            <div class="form-row">
+                                <label for="storage">Speicherlösung</label>
+                                <select id="storage" name="storage"></select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label for="service">Servicepaket</label>
+                            <select id="service" name="service"></select>
+                        </div>
+                        <div class="form-row">
+                            <label for="notes">Hinweise</label>
+                            <textarea id="notes" name="notes" rows="3" placeholder="Beschreiben Sie besondere Anforderungen oder Software-Wünsche"></textarea>
+                        </div>
+                    </form>
+                    <div class="configurator__summary" aria-live="polite">
+                        <h4>Preisübersicht</h4>
+                        <ul id="summary-list" class="summary-list"></ul>
+                        <dl class="summary-total">
+                            <div>
+                                <dt>Gesamtpreis</dt>
+                                <dd id="summary-total">0 €</dd>
+                            </div>
+                            <div>
+                                <dt>Monatliche Servicekosten</dt>
+                                <dd id="summary-service">0 €</dd>
+                            </div>
+                        </dl>
+                        <button class="button button--primary" type="button" id="request-offer">Angebot anfordern</button>
+                        <p class="summary-hint">Sie erhalten innerhalb von 24 Stunden ein unverbindliches Angebot per E-Mail.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="workflow">
+            <div class="container">
+                <span class="section__eyebrow">So arbeiten wir</span>
+                <h2>In vier Schritten zur perfekten Lösung.</h2>
+                <div class="timeline">
+                    <article class="timeline__item">
+                        <span class="timeline__step">1</span>
+                        <h3>Analyse & Beratung</h3>
+                        <p>Wir sprechen über Ziele, Zielgruppen und bestehende Systeme. Auf Basis einer klaren Strategie erhalten Sie ein transparentes Angebot.</p>
+                    </article>
+                    <article class="timeline__item">
+                        <span class="timeline__step">2</span>
+                        <h3>Konzeption & Design</h3>
+                        <p>Wireframes, Content-Planung und Designsysteme entstehen in enger Abstimmung. Bei Reparaturen erfolgt eine detaillierte Fehlerdiagnose.</p>
+                    </article>
+                    <article class="timeline__item">
+                        <span class="timeline__step">3</span>
+                        <h3>Umsetzung & Test</h3>
+                        <p>Entwicklung, Hardware-Aufbau und Qualitätskontrolle. Wir dokumentieren alle Schritte und sorgen für nahtlose Übergaben.</p>
+                    </article>
+                    <article class="timeline__item">
+                        <span class="timeline__step">4</span>
+                        <h3>Launch & Betreuung</h3>
+                        <p>Go-Live, Schulungen und laufende Betreuung. Wir überwachen Systeme proaktiv und optimieren kontinuierlich.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section--muted" id="testimonials">
+            <div class="container">
+                <span class="section__eyebrow">Stimmen unserer Kunden</span>
+                <h2>Warum Unternehmen uns vertrauen.</h2>
+                <div class="grid grid--testimonials">
+                    <figure class="testimonial">
+                        <blockquote>
+                            „Der Relaunch unserer Website wurde schneller umgesetzt als geplant. Besonders begeistert hat uns das Monitoring und die sofortige Hilfe bei Fragen.“
+                        </blockquote>
+                        <figcaption>
+                            <strong>Sabine Lutz</strong>
+                            <span>Geschäftsführerin, Lutz Consulting</span>
+                        </figcaption>
+                    </figure>
+                    <figure class="testimonial">
+                        <blockquote>
+                            „Unser CAD-Team profitiert vom neuen Workstation-Cluster enorm. Digitalwerft IT hat die Hardware perfekt auf unsere Software abgestimmt.“
+                        </blockquote>
+                        <figcaption>
+                            <strong>Marco Drees</strong>
+                            <span>Technische Leitung, Formwerk GmbH</span>
+                        </figcaption>
+                    </figure>
+                    <figure class="testimonial">
+                        <blockquote>
+                            „Schnelle Analyse, transparente Preise und freundlicher Vor-Ort-Service. Meine PCs laufen wieder stabil – klare Empfehlung!“
+                        </blockquote>
+                        <figcaption>
+                            <strong>Eva Bach</strong>
+                            <span>Freelance Fotografin</span>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contact">
+            <div class="container container--split">
+                <div class="section__content">
+                    <span class="section__eyebrow">Kontakt</span>
+                    <h2>Starten wir Ihr nächstes Projekt.</h2>
+                    <p>Vereinbaren Sie ein unverbindliches Beratungsgespräch oder beschreiben Sie Ihr Vorhaben. Wir melden uns innerhalb eines Werktags zurück.</p>
+                    <div class="contact-details">
+                        <a href="tel:+491234567890">+49 123 456 7890</a>
+                        <a href="mailto:kontakt@digitalwerft-it.de">kontakt@digitalwerft-it.de</a>
+                        <p>Digitalwerft IT · Musterstraße 12 · 12345 Hamburg</p>
+                        <p>Mo–Fr 08:00–18:00 Uhr · Notfallhotline für Wartungskunden: 24/7</p>
+                    </div>
+                </div>
+                <form class="contact-form" aria-label="Kontaktformular">
+                    <div class="form-row">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Ihr vollständiger Name" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="email">E-Mail</label>
+                        <input type="email" id="email" name="email" placeholder="beispiel@unternehmen.de" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="phone">Telefon</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Optional für Rückfragen">
+                    </div>
+                    <div class="form-row">
+                        <label for="project">Projektbeschreibung</label>
+                        <textarea id="project" name="project" rows="4" placeholder="Was dürfen wir für Sie umsetzen?"></textarea>
+                    </div>
+                    <div class="form-row form-row--checkbox">
+                        <input type="checkbox" id="privacy" name="privacy" required>
+                        <label for="privacy">Ich stimme der Verarbeitung meiner Daten gemäß Datenschutzerklärung zu.</label>
+                    </div>
+                    <button class="button button--primary" type="submit">Nachricht senden</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__content">
+            <div>
+                <a class="nav__logo" href="#top">Digitalwerft<span>IT</span></a>
+                <p>Ganzheitliche IT-Lösungen für kleine und mittlere Unternehmen.</p>
+            </div>
+            <div class="footer__links">
+                <a href="#services">Leistungen</a>
+                <a href="#shop">Konfigurator</a>
+                <a href="#contact">Kontakt</a>
+                <a href="#">Impressum</a>
+                <a href="#">Datenschutz</a>
+            </div>
+            <p class="footer__copyright">© <span id="year"></span> Digitalwerft IT. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
