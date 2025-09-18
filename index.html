@@ -1,1 +1,1011 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="IT-Agentur für Gastronomie und kleine Unternehmen: Webdesign, Hosting, PC-Reparaturen und Online-Shop mit PC-Konfigurator." />
+    <title>Nordlicht IT Solutions – Digitale Komplettlösungen für Gastro &amp; Kleinunternehmen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-light: #f4f6fb;
+            --bg-dark: #0b1f33;
+            --primary: #1a6ef2;
+            --primary-dark: #1557c7;
+            --accent: #fbbc05;
+            --text: #1f2a3d;
+            --text-muted: #5f6c80;
+            --card-bg: #ffffff;
+            --border: rgba(15, 45, 85, 0.08);
+            --radius-lg: 28px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
+            --shadow-soft: 0 24px 48px rgba(15, 45, 85, 0.08);
+            --shadow-hover: 0 32px 56px rgba(15, 45, 85, 0.12);
+            --spacing: clamp(3rem, 6vw, 7rem);
+        }
 
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #f8f9ff 0%, #eef3ff 45%, #fdfdff 100%);
+            color: var(--text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1180px, 92vw);
+            margin: 0 auto;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(12px);
+            background: rgba(248, 249, 255, 0.85);
+            border-bottom: 1px solid rgba(13, 33, 68, 0.05);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 0;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--primary);
+        }
+
+        .navigation {
+            display: flex;
+            gap: 1.6rem;
+            font-size: 0.95rem;
+        }
+
+        .navigation a {
+            padding: 0.5rem 0.8rem;
+            border-radius: var(--radius-sm);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .navigation a:hover {
+            background: rgba(26, 110, 242, 0.12);
+            color: var(--primary);
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 999px;
+            padding: 0.85rem 1.8rem;
+            font-weight: 600;
+            font-size: 0.98rem;
+            letter-spacing: 0.02em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            box-shadow: 0 18px 32px rgba(26, 110, 242, 0.28);
+        }
+
+        .cta-button svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            background: var(--primary-dark);
+            box-shadow: 0 24px 40px rgba(21, 87, 199, 0.32);
+        }
+
+        main {
+            overflow-x: hidden;
+        }
+
+        .hero {
+            padding: calc(var(--spacing) + 2rem) 0 var(--spacing) 0;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 12% 10% auto 10%;
+            height: 70%;
+            background: radial-gradient(circle at 10% 10%, rgba(26, 110, 242, 0.08), transparent 55%),
+                        radial-gradient(circle at 85% 30%, rgba(251, 188, 5, 0.15), transparent 55%);
+            z-index: -1;
+        }
+
+        .hero-grid {
+            display: grid;
+            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            align-items: center;
+        }
+
+        .eyebrow {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 3.8rem);
+            font-weight: 700;
+            margin: 1rem 0;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 34ch;
+        }
+
+        .hero-card {
+            position: relative;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 2.4rem;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .hero-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(26, 110, 242, 0.08), rgba(251, 188, 5, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .hero-card:hover::after {
+            opacity: 1;
+        }
+
+        .hero-card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .metric {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.65rem 1.2rem;
+            background: rgba(26, 110, 242, 0.08);
+            border-radius: 999px;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .metric span {
+            display: inline-flex;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 2.6rem);
+            margin: 0 0 1rem 0;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin: 0 0 0.6rem 0;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(15, 45, 85, 0.05);
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .services, .section {
+            padding: var(--spacing) 0;
+        }
+
+        .section-header {
+            max-width: 640px;
+            text-align: center;
+            margin: 0 auto 3.4rem auto;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .service-card {
+            position: relative;
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 18px;
+            background: rgba(26, 110, 242, 0.12);
+            display: grid;
+            place-items: center;
+            margin-bottom: 1.4rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .service-card ul {
+            padding-left: 1.2rem;
+            margin: 0.8rem 0 0 0;
+            color: var(--text-muted);
+        }
+
+        .service-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .split {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, rgba(11, 31, 51, 0.9), rgba(26, 110, 242, 0.82));
+            color: #fff;
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: rgba(251, 188, 5, 0.2);
+            top: -110px;
+            right: -60px;
+            filter: blur(0.5px);
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .feature-list {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.8rem;
+        }
+
+        .feature-list li {
+            list-style: none;
+            position: relative;
+            padding-left: 1.8rem;
+        }
+
+        .feature-list li::before {
+            content: '\2713';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 2.6rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .stat-card strong {
+            display: block;
+            font-size: clamp(2rem, 3vw, 2.6rem);
+            color: var(--primary);
+            margin-bottom: 0.6rem;
+        }
+
+        .timeline {
+            margin-top: 2.5rem;
+            display: grid;
+            gap: 1.6rem;
+        }
+
+        .timeline-item {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: auto 1fr;
+            align-items: flex-start;
+        }
+
+        .timeline-badge {
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            background: rgba(26, 110, 242, 0.12);
+            display: grid;
+            place-items: center;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .highlight {
+            background: rgba(26, 110, 242, 0.08);
+            border-left: 4px solid var(--primary);
+            padding: 1.6rem;
+            border-radius: var(--radius-sm);
+            margin-top: 2rem;
+        }
+
+        .testimonials {
+            background: radial-gradient(circle at 15% 20%, rgba(26, 110, 242, 0.12), transparent 55%),
+                        radial-gradient(circle at 80% 30%, rgba(11, 31, 51, 0.16), transparent 60%),
+                        #0b1f33;
+            color: #fff;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '\201C';
+            font-size: 3.4rem;
+            position: absolute;
+            top: -1.6rem;
+            left: 1rem;
+            color: rgba(251, 188, 5, 0.6);
+        }
+
+        .testimonial-card h4 {
+            margin: 1.2rem 0 0.2rem 0;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-card span {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .stacked-cards {
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .mini-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 1.6rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .mini-card strong {
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .cta-section {
+            position: relative;
+            border-radius: var(--radius-lg);
+            padding: clamp(2.5rem, 4vw, 3.4rem);
+            background: linear-gradient(135deg, rgba(26, 110, 242, 0.95), rgba(11, 31, 51, 0.95));
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .cta-section::after {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            right: -120px;
+            bottom: -120px;
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.6rem;
+        }
+
+        .cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.8rem 1.2rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.6rem;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 1.8rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .faq-item h4 {
+            margin: 0 0 0.8rem 0;
+        }
+
+        .contact-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        form {
+            display: grid;
+            gap: 1.1rem;
+        }
+
+        label {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        input, textarea {
+            border: 1px solid rgba(15, 45, 85, 0.12);
+            border-radius: var(--radius-sm);
+            padding: 0.9rem 1rem;
+            font: inherit;
+            resize: vertical;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+            background: #fff;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 110, 242, 0.15);
+        }
+
+        textarea {
+            min-height: 160px;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 2.4rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .contact-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 1.6rem 0 0 0;
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .contact-card li {
+            display: grid;
+            gap: 0.2rem;
+        }
+
+        .contact-card span {
+            font-weight: 600;
+        }
+
+        footer {
+            background: #071424;
+            color: rgba(255, 255, 255, 0.78);
+            padding: 2.4rem 0;
+            margin-top: var(--spacing);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-brand {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            gap: 0.6rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .legal {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 720px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .navigation {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-card, .feature-card, .stat-card, .cta-section {
+                padding: 2rem;
+            }
+
+            .cta-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <nav>
+                <div class="logo">Nordlicht IT Solutions</div>
+                <div class="navigation">
+                    <a href="#leistungen">Leistungen</a>
+                    <a href="#branchen">Gastro</a>
+                    <a href="#online-shop">Online-Shop</a>
+                    <a href="#referenzen">Referenzen</a>
+                    <a href="#kontakt">Kontakt</a>
+                </div>
+                <a class="cta-button" href="#kontakt" aria-label="Kostenlose Erstberatung vereinbaren">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Kostenlose Beratung
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="start">
+            <div class="container hero-grid">
+                <div>
+                    <span class="eyebrow">Full-Service IT-Partner</span>
+                    <h1>Digitale Erlebniswelten für Gastronomie &amp; Kleinunternehmen</h1>
+                    <p>
+                        Wir gestalten unverwechselbare Webseiten, zuverlässige Hosting-Infrastrukturen und performante Online-Shops
+                        – inklusive PC-Reparaturen und individueller Hardware-Konfiguration. Alles aus einer Hand, persönlich und verbindlich.
+                    </p>
+                    <div class="cta-actions" style="margin-top: 2rem;">
+                        <a class="cta-button" href="#kontakt">Projekt anfragen</a>
+                        <a class="cta-secondary" href="#leistungen">Leistungen entdecken</a>
+                    </div>
+                </div>
+                <div class="hero-card" role="presentation">
+                    <div class="hero-card-content">
+                        <div class="metric"><span></span> 98% Kundenzufriedenheit</div>
+                        <h3>Erfolg mit System</h3>
+                        <p>
+                            Von der digitalen Speisekarte bis zum skalierbaren Webshop: Wir verbinden ansprechendes Design mit technischer Exzellenz,
+                            damit Ihre Marke sichtbar bleibt und Prozesse reibungslos funktionieren.
+                        </p>
+                        <div class="stacked-cards" style="margin-top: 2rem;">
+                            <div class="mini-card">
+                                <strong>24/7 Hosting-Monitoring</strong>
+                                Proaktives Incident-Management mit täglichen Backups und Hochverfügbarkeits-Setup.
+                            </div>
+                            <div class="mini-card">
+                                <strong>Vor-Ort &amp; Remote Support</strong>
+                                Schnelle PC- und Netzwerk-Reparaturen, damit Ihre Teams produktiv bleiben.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="leistungen">
+            <div class="container">
+                <div class="section-header">
+                    <span class="badge">Leistungsportfolio</span>
+                    <h2>Maßgeschneiderte IT-Lösungen, die Ihr Business voranbringen</h2>
+                    <p>Wir begleiten Sie durch alle Phasen der digitalen Transformation – von der Idee bis zum skalierenden Betrieb.</p>
+                </div>
+                <div class="service-grid">
+                    <article class="service-card">
+                        <div class="service-icon">WD</div>
+                        <h3>Websites für Gastronomie</h3>
+                        <p>Atmosphäre, Angebot und Persönlichkeit Ihrer Location perfekt in Szene gesetzt.</p>
+                        <ul>
+                            <li>Digitale Speise- &amp; Getränkekarten</li>
+                            <li>Reservierungs- &amp; Event-Module</li>
+                            <li>Professionelle Fotos &amp; Storytelling</li>
+                        </ul>
+                    </article>
+                    <article class="service-card">
+                        <div class="service-icon">KMU</div>
+                        <h3>Webdesign für Kleinunternehmen</h3>
+                        <p>Conversion-starke Unternehmensauftritte mit klarer Markenbotschaft und SEO-Fokus.</p>
+                        <ul>
+                            <li>Corporate Design &amp; Brand Guidelines</li>
+                            <li>Lead-Generierung mit smarten Formularen</li>
+                            <li>Lokales SEO &amp; Performance-Optimierung</li>
+                        </ul>
+                    </article>
+                    <article class="service-card">
+                        <div class="service-icon">IT</div>
+                        <h3>Hosting &amp; Managed Services</h3>
+                        <p>Rundum-sorglos-Paket für stabile, skalierbare und DSGVO-konforme Plattformen.</p>
+                        <ul>
+                            <li>Cloud- &amp; On-Premise Hosting</li>
+                            <li>Monitoring, Backups &amp; Security Audits</li>
+                            <li>Wartung, Updates &amp; Support</li>
+                        </ul>
+                    </article>
+                    <article class="service-card">
+                        <div class="service-icon">PC</div>
+                        <h3>PC-Reparaturen &amp; Hardware</h3>
+                        <p>Schnelle Fehlerdiagnose, Ersatzteile &amp; individuelle Systemoptimierung.</p>
+                        <ul>
+                            <li>Notebook, Desktop &amp; Kassensysteme</li>
+                            <li>Virenschutz, Datenrettung, Upgrades</li>
+                            <li>Vor-Ort-Service &amp; Remote-Helpdesk</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="branchen">
+            <div class="container split">
+                <div class="feature-card">
+                    <div class="badge" style="background: rgba(255, 255, 255, 0.12); color: #fff;">Fokus Gastronomie</div>
+                    <h2>Digitale Gastfreundschaft, die begeistert</h2>
+                    <p>
+                        Erleben Sie individuell gestaltete Gastro-Websites, die Lust auf mehr machen. Wir kombinieren appetitliches Design mit
+                        smarter Funktionalität, damit Gäste reservieren, bestellen und sich informieren können – überall und jederzeit.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Headless CMS für blitzschnelle Inhaltsaktualisierung durch Ihr Team</li>
+                        <li>Mehrsprachige Menüs, saisonale Highlights &amp; allergenfreundliche Darstellung</li>
+                        <li>Integration von Lieferdiensten, Reservierungs-Tools und Gutschein-Shops</li>
+                        <li>Marketing-Automation mit Newsletter, Social Ads &amp; Kampagnen-Tracking</li>
+                    </ul>
+                </div>
+                <div class="stat-card">
+                    <div class="badge">Warum Nordlicht IT?</div>
+                    <strong>+36% Online-Reservierungen</strong>
+                    <p>Im Durchschnitt steigern unsere Gastronomie-Projekte die Buchungen im ersten Jahr um 36 %.</p>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-badge">1</div>
+                            <div>
+                                <strong>Analyse &amp; Konzept</strong>
+                                Gemeinsamer Workshop, Zieldefinition, Wettbewerbsanalyse und Digitalstrategie.
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-badge">2</div>
+                            <div>
+                                <strong>Design &amp; Content</strong>
+                                UX-Design, Storytelling, Fotografie &amp; Copywriting für einen unverwechselbaren Auftritt.
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-badge">3</div>
+                            <div>
+                                <strong>Entwicklung &amp; Launch</strong>
+                                Technische Umsetzung, Hosting-Setup, Schulung Ihres Teams und kontinuierliche Betreuung.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="highlight">
+                        <strong>Signature Service:</strong> Digitale Speisekarte mit QR-Code &amp; Live-Management für Events, Wochenkarten und Specials.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="online-shop">
+            <div class="container">
+                <div class="section-header">
+                    <span class="badge">E-Commerce &amp; Hardware</span>
+                    <h2>Ihr individueller Online-Shop mit leistungsstarkem PC-Konfigurator</h2>
+                    <p>
+                        Wir verbinden professionelle Shop-Systeme mit einem intuitiven PC-Konfigurator – ideal für Elektronikhändler, IT-Dienstleister
+                        und ambitionierte Gamer. Von der Produktlogik bis zur Anbindung an Warenwirtschaft und Payment.
+                    </p>
+                </div>
+                <div class="split">
+                    <div class="stacked-cards">
+                        <div class="mini-card">
+                            <strong>Intelligente Produktlogik</strong>
+                            Automatisierte Kompatibilitätsprüfung, Bundle-Empfehlungen und dynamische Preisgestaltung.
+                        </div>
+                        <div class="mini-card">
+                            <strong>Erweiterbare Plattform</strong>
+                            Shopify, Shopware oder WooCommerce – inklusive Schnittstellen zu ERP, CRM und Versanddienstleistern.
+                        </div>
+                        <div class="mini-card">
+                            <strong>After-Sales &amp; Service</strong>
+                            Kundenportal, Ticket-System und Wartungsverträge für eine nachhaltige Kundenbindung.
+                        </div>
+                    </div>
+                    <div class="hero-card" style="box-shadow: var(--shadow-hover);">
+                        <div class="hero-card-content">
+                            <div class="metric"><span></span> 4-Wochen Go-Live</div>
+                            <h3>Launch in Rekordzeit</h3>
+                            <p>
+                                Unser modulares Framework sorgt dafür, dass Ihr Shop innerhalb von vier Wochen live gehen kann – inklusive Konfigurator,
+                                Hosting, Zahlungsabwicklung und rechtssicherer Datenschutz-Dokumentation.
+                            </p>
+                            <ul class="feature-list" style="margin-top: 1.6rem;">
+                                <li>Modernes UI/UX-Design mit Conversion-Fokus</li>
+                                <li>Integration gängiger Zahlungsmethoden &amp; Ratenkauf</li>
+                                <li>Analyse-Dashboards für Umsatz, Lager &amp; Marketing</li>
+                                <li>Optional: Inhouse-Fulfillment &amp; Dropshipping-Setup</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section testimonials" id="referenzen">
+            <div class="container">
+                <div class="section-header">
+                    <span class="badge" style="background: rgba(255,255,255,0.12); color:#fff;">Ergebnisse, die überzeugen</span>
+                    <h2>Referenzen &amp; Stimmen unserer Kunden</h2>
+                    <p>
+                        Langfristige Partnerschaften sind unser Anspruch. Wir arbeiten eng mit Inhabern und Teams zusammen,
+                        um digitale Produkte zu entwickeln, die begeistern und Umsatz generieren.
+                    </p>
+                </div>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <p>"Dank Nordlicht IT Solutions haben wir eine Website, auf der unsere Menüs tagesaktuell gepflegt werden.
+                            Die Online-Reservierungen sind innerhalb weniger Monate um 40% gestiegen."</p>
+                        <h4>Restaurant Seeluft</h4>
+                        <span>Fine Dining &amp; Eventlocation</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"Der PC-Konfigurator ist ein Gamechanger. Kunden stellen sich ihre Systeme selbst zusammen,
+                            und wir erhalten automatisch passende Bestellungen mit allen Details."</p>
+                        <h4>ByteBox Handelspartner</h4>
+                        <span>IT-Fachhändler</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"Vom Logo über die Website bis zum Hosting – alles aus einem Guss. Der Support reagiert schnell und professionell,
+                            egal ob es um Hardware oder Software geht."</p>
+                        <h4>Küstenwerkstatt</h4>
+                        <span>Handwerksbetrieb</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="faq">
+            <div class="container">
+                <div class="section-header">
+                    <span class="badge">FAQs</span>
+                    <h2>Häufige Fragen unserer Kunden</h2>
+                    <p>Transparenz ist uns wichtig. Deshalb beantworten wir die wichtigsten Fragen bereits im Vorfeld.</p>
+                </div>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>Wie läuft ein Projektstart ab?</h4>
+                        <p>Wir beginnen mit einem kostenlosen Erstgespräch, analysieren Ihre Ziele und erstellen ein individuelles Angebot mit klarer Roadmap.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Übernehmt ihr auch bestehende Webseiten?</h4>
+                        <p>Ja. Wir migrieren Inhalte, verbessern Performance und übernehmen Hosting &amp; Support – inklusive Datenschutz-Check.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Welche Service-Level bietet ihr beim Hosting?</h4>
+                        <p>Monitoring rund um die Uhr, garantierte Reaktionszeiten, tägliche Backups und Sicherheitsupdates nach definierten Intervallen.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Wie schnell repariert ihr defekte PCs?</h4>
+                        <p>In Notfällen noch am gleichen Tag – remote oder vor Ort. Standardfälle bearbeiten wir innerhalb von 48 Stunden.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="kontakt">
+            <div class="container">
+                <div class="cta-section">
+                    <span class="badge" style="background: rgba(255, 255, 255, 0.18); color:#fff;">Nächster Schritt</span>
+                    <h2>Bereit für Ihren digitalen Vorsprung?</h2>
+                    <p>
+                        Sichern Sie sich jetzt Ihre unverbindliche Erstberatung. Gemeinsam entwickeln wir eine digitale Strategie,
+                        die genau zu Ihren Gästen, Kunden und Teams passt.
+                    </p>
+                    <div class="cta-actions">
+                        <a class="cta-button" href="tel:+49401234567">Jetzt anrufen</a>
+                        <a class="cta-secondary" href="mailto:hello@nordlicht-it.de">hello@nordlicht-it.de</a>
+                    </div>
+                </div>
+
+                <div class="contact-section">
+                    <div class="contact-card" aria-label="Kontaktinformationen">
+                        <div class="badge">Kontakt</div>
+                        <h3>Nordlicht IT Solutions</h3>
+                        <p>Ihr Partner für Webdesign, Hosting, PC-Services und E-Commerce-Lösungen.</p>
+                        <ul>
+                            <li>
+                                <span>Telefon</span>
+                                <a href="tel:+49401234567">+49 40 123 45 67</a>
+                            </li>
+                            <li>
+                                <span>E-Mail</span>
+                                <a href="mailto:hello@nordlicht-it.de">hello@nordlicht-it.de</a>
+                            </li>
+                            <li>
+                                <span>Standort</span>
+                                Hafenstraße 12, 20095 Hamburg
+                            </li>
+                            <li>
+                                <span>Supportzeiten</span>
+                                Mo–Fr 8:00–18:00 Uhr &amp; nach Vereinbarung
+                            </li>
+                        </ul>
+                    </div>
+                    <form aria-label="Kontaktformular">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Ihr Name" required>
+
+                        <label for="email">E-Mail</label>
+                        <input type="email" id="email" name="email" placeholder="Ihre E-Mail-Adresse" required>
+
+                        <label for="unternehmen">Unternehmen</label>
+                        <input type="text" id="unternehmen" name="unternehmen" placeholder="Firmenname">
+
+                        <label for="nachricht">Projektbeschreibung</label>
+                        <textarea id="nachricht" name="nachricht" placeholder="Beschreiben Sie Ihr Vorhaben" required></textarea>
+
+                        <button class="cta-button" type="submit">Anfrage senden</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">Nordlicht IT Solutions</div>
+                    <p>Strategie, Design, Technologie und Support – vereint in einer Agentur für ambitionierte Gastro- und KMU-Projekte.</p>
+                </div>
+                <div>
+                    <h4>Leistungen</h4>
+                    <ul class="footer-links">
+                        <li><a href="#leistungen">Webdesign &amp; Markenaufbau</a></li>
+                        <li><a href="#branchen">Gastro-Digitalisierung</a></li>
+                        <li><a href="#online-shop">E-Commerce &amp; Konfigurator</a></li>
+                        <li><a href="#kontakt">PC-Service &amp; Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Ressourcen</h4>
+                    <ul class="footer-links">
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#referenzen">Kundenstimmen</a></li>
+                        <li><a href="#kontakt">Support anfordern</a></li>
+                        <li><a href="mailto:hello@nordlicht-it.de">Partner werden</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="legal">
+                &copy; <span id="year"></span> Nordlicht IT Solutions. Alle Rechte vorbehalten. | Datenschutz &amp; Impressum auf Anfrage.
+            </div>
+        </div>
+        <script>
+            document.getElementById('year').textContent = new Date().getFullYear();
+        </script>
+    </footer>
+</body>
+</html>
