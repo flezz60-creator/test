@@ -1,1 +1,1378 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="IT-Agentur für Gastronomie und kleine Unternehmen: Webdesign, Hosting, PC-Reparaturen und Online-Shop mit PC-Konfigurator." />
+    <title>Nordlicht IT Solutions – Digitale Komplettlösungen für Gastro &amp; Kleinunternehmen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-light: #f4f6fb;
+            --bg-dark: #0b1f33;
+            --primary: #1a6ef2;
+            --primary-dark: #1557c7;
+            --accent: #fbbc05;
+            --text: #1f2a3d;
+            --text-muted: #5f6c80;
+            --card-bg: #ffffff;
+            --border: rgba(15, 45, 85, 0.08);
+            --radius-lg: 28px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
+            --shadow-soft: 0 24px 48px rgba(15, 45, 85, 0.08);
+            --shadow-hover: 0 32px 56px rgba(15, 45, 85, 0.12);
+            --spacing: clamp(3rem, 6vw, 7rem);
+        }
 
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #f8f9ff 0%, #eef3ff 45%, #fdfdff 100%);
+            color: var(--text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1180px, 92vw);
+            margin: 0 auto;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(12px);
+            background: rgba(248, 249, 255, 0.85);
+            border-bottom: 1px solid rgba(13, 33, 68, 0.05);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 0;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--primary);
+        }
+
+        .navigation {
+            display: flex;
+            gap: 1.6rem;
+            font-size: 0.95rem;
+        }
+
+        .navigation a {
+            padding: 0.5rem 0.8rem;
+            border-radius: var(--radius-sm);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .navigation a:hover {
+            background: rgba(26, 110, 242, 0.12);
+            color: var(--primary);
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 999px;
+            padding: 0.85rem 1.8rem;
+            font-weight: 600;
+            font-size: 0.98rem;
+            letter-spacing: 0.02em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            box-shadow: 0 18px 32px rgba(26, 110, 242, 0.28);
+        }
+
+        .cta-button svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            background: var(--primary-dark);
+            box-shadow: 0 24px 40px rgba(21, 87, 199, 0.32);
+        }
+
+        main {
+            overflow-x: hidden;
+        }
+
+        .hero {
+            padding: calc(var(--spacing) + 2rem) 0 var(--spacing) 0;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 12% 10% auto 10%;
+            height: 70%;
+            background: radial-gradient(circle at 10% 10%, rgba(26, 110, 242, 0.08), transparent 55%),
+                        radial-gradient(circle at 85% 30%, rgba(251, 188, 5, 0.15), transparent 55%);
+            z-index: -1;
+        }
+
+        .hero-grid {
+            display: grid;
+            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            align-items: center;
+        }
+
+        .eyebrow {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 3.8rem);
+            font-weight: 700;
+            margin: 1rem 0;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 34ch;
+        }
+
+        .hero-card {
+            position: relative;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 2.4rem;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .hero-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(26, 110, 242, 0.08), rgba(251, 188, 5, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .hero-card:hover::after {
+            opacity: 1;
+        }
+
+        .hero-card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .metric {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.65rem 1.2rem;
+            background: rgba(26, 110, 242, 0.08);
+            border-radius: 999px;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .metric span {
+            display: inline-flex;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 2.6rem);
+            margin: 0 0 1rem 0;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin: 0 0 0.6rem 0;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(15, 45, 85, 0.05);
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .services, .section {
+            padding: var(--spacing) 0;
+        }
+
+        .section-header {
+            max-width: 640px;
+            text-align: center;
+            margin: 0 auto 3.4rem auto;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .service-card {
+            position: relative;
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 18px;
+            background: rgba(26, 110, 242, 0.12);
+            display: grid;
+            place-items: center;
+            margin-bottom: 1.4rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .service-card ul {
+            padding-left: 1.2rem;
+            margin: 0.8rem 0 0 0;
+            color: var(--text-muted);
+        }
+
+        .service-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .split {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, rgba(11, 31, 51, 0.9), rgba(26, 110, 242, 0.82));
+            color: #fff;
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: rgba(251, 188, 5, 0.2);
+            top: -110px;
+            right: -60px;
+            filter: blur(0.5px);
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .feature-list {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.8rem;
+        }
+
+        .feature-list li {
+            list-style: none;
+            position: relative;
+            padding-left: 1.8rem;
+        }
+
+        .feature-list li::before {
+            content: '\2713';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 2.6rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .stat-card strong {
+            display: block;
+            font-size: clamp(2rem, 3vw, 2.6rem);
+            color: var(--primary);
+            margin-bottom: 0.6rem;
+        }
+
+        .timeline {
+            margin-top: 2.5rem;
+            display: grid;
+            gap: 1.6rem;
+        }
+
+        .timeline-item {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: auto 1fr;
+            align-items: flex-start;
+        }
+
+        .timeline-badge {
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            background: rgba(26, 110, 242, 0.12);
+            display: grid;
+            place-items: center;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .highlight {
+            background: rgba(26, 110, 242, 0.08);
+            border-left: 4px solid var(--primary);
+            padding: 1.6rem;
+            border-radius: var(--radius-sm);
+            margin-top: 2rem;
+        }
+
+        .testimonials {
+            background: radial-gradient(circle at 15% 20%, rgba(26, 110, 242, 0.12), transparent 55%),
+                        radial-gradient(circle at 80% 30%, rgba(11, 31, 51, 0.16), transparent 60%),
+                        #0b1f33;
+            color: #fff;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '\201C';
+            font-size: 3.4rem;
+            position: absolute;
+            top: -1.6rem;
+            left: 1rem;
+            color: rgba(251, 188, 5, 0.6);
+        }
+
+        .testimonial-card h4 {
+            margin: 1.2rem 0 0.2rem 0;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-card span {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .stacked-cards {
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .mini-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 1.6rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .mini-card strong {
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .mini-card p {
+            margin: 0;
+            color: var(--text-muted);
+        }
+
+        .shop-grid {
+            display: grid;
+            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            align-items: start;
+        }
+
+        .shop-intro {
+            display: grid;
+            gap: 1.4rem;
+        }
+
+        .shop-highlight {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: clamp(1.8rem, 4vw, 2.4rem);
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border);
+        }
+
+        .shop-highlight h3 {
+            margin-top: 0;
+            margin-bottom: 1.2rem;
+        }
+
+        .shop-steps {
+            margin: 0;
+            padding-left: 1.4rem;
+            display: grid;
+            gap: 0.6rem;
+            color: var(--text-muted);
+        }
+
+        .configurator {
+            background: linear-gradient(150deg, rgba(26, 110, 242, 0.08), rgba(251, 188, 5, 0.12));
+            border-radius: var(--radius-lg);
+            padding: clamp(1.6rem, 4vw, 2.4rem);
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(26, 110, 242, 0.18);
+        }
+
+        .configurator h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .configurator form {
+            display: grid;
+            gap: 1.4rem;
+        }
+
+        .config-option label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.45rem;
+        }
+
+        .config-option select,
+        .config-option input,
+        .config-option textarea {
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 0.75rem 0.95rem;
+            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.92);
+        }
+
+        .config-option select:focus,
+        .config-option input:focus,
+        .config-option textarea:focus {
+            outline: 2px solid rgba(26, 110, 242, 0.25);
+            border-color: rgba(26, 110, 242, 0.35);
+        }
+
+        .config-option textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .shop-addons {
+            display: grid;
+            gap: 0.9rem;
+        }
+
+        .shop-addon {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.8rem;
+            align-items: flex-start;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--radius-md);
+            padding: 0.9rem 1rem;
+            border: 1px solid rgba(26, 110, 242, 0.18);
+        }
+
+        .shop-addon strong {
+            display: block;
+            font-weight: 600;
+        }
+
+        .shop-addon span {
+            display: block;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        .order-summary {
+            background: #0b1f33;
+            color: #fff;
+            border-radius: var(--radius-lg);
+            padding: 1.4rem 1.6rem;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .order-summary h4 {
+            margin: 0;
+        }
+
+        .order-summary ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 0.45rem;
+        }
+
+        .order-summary li {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            font-size: 0.92rem;
+        }
+
+        .order-summary small {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.72);
+        }
+
+        .price-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .price-total span:last-child {
+            font-size: 1.2rem;
+        }
+
+        .config-form button {
+            justify-self: flex-start;
+        }
+
+        .order-feedback {
+            font-size: 0.9rem;
+            color: #0b1f33;
+            background: rgba(26, 110, 242, 0.12);
+            border-radius: var(--radius-sm);
+            padding: 0.8rem 1rem;
+            display: none;
+        }
+
+        .order-feedback.is-visible {
+            display: block;
+        }
+
+        .cta-section {
+            position: relative;
+            border-radius: var(--radius-lg);
+            padding: clamp(2.5rem, 4vw, 3.4rem);
+            background: linear-gradient(135deg, rgba(26, 110, 242, 0.95), rgba(11, 31, 51, 0.95));
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .cta-section::after {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            right: -120px;
+            bottom: -120px;
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.6rem;
+        }
+
+        .cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.8rem 1.2rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.6rem;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 1.8rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .faq-item h4 {
+            margin: 0 0 0.8rem 0;
+        }
+
+        .contact-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        form {
+            display: grid;
+            gap: 1.1rem;
+        }
+
+        label {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        input, textarea {
+            border: 1px solid rgba(15, 45, 85, 0.12);
+            border-radius: var(--radius-sm);
+            padding: 0.9rem 1rem;
+            font: inherit;
+            resize: vertical;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+            background: #fff;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 110, 242, 0.15);
+        }
+
+        textarea {
+            min-height: 160px;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 2.4rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .contact-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 1.6rem 0 0 0;
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .contact-card li {
+            display: grid;
+            gap: 0.2rem;
+        }
+
+        .contact-card span {
+            font-weight: 600;
+        }
+
+        footer {
+            background: #071424;
+            color: rgba(255, 255, 255, 0.78);
+            padding: 2.4rem 0;
+            margin-top: var(--spacing);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-brand {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            gap: 0.6rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .legal {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 720px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .navigation {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-card, .feature-card, .stat-card, .cta-section {
+                padding: 2rem;
+            }
+
+            .cta-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .configurator {
+                padding: 1.4rem;
+            }
+
+            .order-summary {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <nav>
+                <div class="logo">Nordlicht IT Solutions</div>
+                <div class="navigation">
+                    <a href="#leistungen">Leistungen</a>
+                    <a href="#branchen">Gastro</a>
+                    <a href="#online-shop">Online-Shop</a>
+                    <a href="#referenzen">Referenzen</a>
+                    <a href="#kontakt">Kontakt</a>
+                </div>
+                <a class="cta-button" href="#kontakt" aria-label="Kostenlose Erstberatung vereinbaren">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Kostenlose Beratung
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="start">
+            <div class="container hero-grid">
+                <div>
+                    <span class="eyebrow">Full-Service IT-Partner</span>
+                    <h1>Digitale Erlebniswelten für Gastronomie &amp; Kleinunternehmen</h1>
+                    <p>
+                        Wir gestalten unverwechselbare Webseiten, übernehmen Ihr komplettes Webhosting inklusive Domain- &amp; SEO-Betreuung und bauen performante Online-Shops
+                        – inklusive PC-Reparaturen und individueller Hardware-Konfiguration. Alles aus einer Hand, persönlich und verbindlich.
+                    </p>
+                    <div class="cta-actions" style="margin-top: 2rem;">
+                        <a class="cta-button" href="#kontakt">Projekt anfragen</a>
+                        <a class="cta-secondary" href="#leistungen">Leistungen entdecken</a>
+                    </div>
+                </div>
+                <div class="hero-card" role="presentation">
+                    <div class="hero-card-content">
+                        <div class="metric"><span></span> 98% Kundenzufriedenheit</div>
+                        <h3>Erfolg mit System</h3>
+                        <p>
+                            Von der digitalen Speisekarte bis zum skalierbaren Webshop: Wir verbinden ansprechendes Design mit technischer Exzellenz,
+                            damit Ihre Marke sichtbar bleibt und Prozesse reibungslos funktionieren.
+                        </p>
+                        <div class="stacked-cards" style="margin-top: 2rem;">
+                            <div class="mini-card">
+                                <strong>Managed Hosting, Domains &amp; SEO</strong>
+                                Wir übernehmen Domainregistrierung, SSL, Ladezeiten-Optimierung und laufendes Sichtbarkeits-Reporting.
+                            </div>
+                            <div class="mini-card">
+                                <strong>Vor-Ort &amp; Remote Support</strong>
+                                Schnelle PC- und Netzwerk-Reparaturen, damit Ihre Teams produktiv bleiben.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="leistungen">
+            <div class="container">
+                <div class="section-header">
+                    <span class="badge">Leistungsportfolio</span>
+                    <h2>Maßgeschneiderte IT-Lösungen, die Ihr Business voranbringen</h2>
+                    <p>Wir begleiten Sie durch alle Phasen der digitalen Transformation – von der Idee bis zum skalierenden Betrieb.</p>
+                </div>
+                <div class="service-grid">
+                    <article class="service-card">
+                        <div class="service-icon">WD</div>
+                        <h3>Websites für Gastronomie</h3>
+                        <p>Atmosphäre, Angebot und Persönlichkeit Ihrer Location perfekt in Szene gesetzt.</p>
+                        <ul>
+                            <li>Digitale Speise- &amp; Getränkekarten</li>
+                            <li>Reservierungs- &amp; Event-Module</li>
+                            <li>Professionelle Fotos &amp; Storytelling</li>
+                        </ul>
+                    </article>
+                    <article class="service-card">
+                        <div class="service-icon">KMU</div>
+                        <h3>Webdesign für Kleinunternehmen</h3>
+                        <p>Conversion-starke Unternehmensauftritte mit klarer Markenbotschaft und SEO-Fokus.</p>
+                        <ul>
+                            <li>Corporate Design &amp; Brand Guidelines</li>
+                            <li>Lead-Generierung mit smarten Formularen</li>
+                            <li>Lokales SEO &amp; Performance-Optimierung</li>
+                        </ul>
+                    </article>
+                    <article class="service-card">
+                        <div class="service-icon">IT</div>
+                        <h3>Managed Hosting &amp; SEO-Betreuung</h3>
+                        <p>Wir übernehmen Webhosting, Domainverwaltung und Suchmaschinenoptimierung für Gastro &amp; KMU.</p>
+                        <ul>
+                            <li>Domain-Registrierung, DNS-Setup &amp; SSL-Verwaltung</li>
+                            <li>Leistungsstarke Server in Deutschland inkl. Monitoring &amp; Backups</li>
+                            <li>Kontinuierliche SEO-Pflege &amp; Performance-Reporting</li>
+                        </ul>
+                    </article>
+                    <article class="service-card">
+                        <div class="service-icon">PC</div>
+                        <h3>PC-Reparaturen &amp; Hardware</h3>
+                        <p>Schnelle Fehlerdiagnose, Ersatzteile &amp; individuelle Systemoptimierung.</p>
+                        <ul>
+                            <li>Notebook, Desktop &amp; Kassensysteme</li>
+                            <li>Virenschutz, Datenrettung, Upgrades</li>
+                            <li>Vor-Ort-Service &amp; Remote-Helpdesk</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="branchen">
+            <div class="container split">
+                <div class="feature-card">
+                    <div class="badge" style="background: rgba(255, 255, 255, 0.12); color: #fff;">Fokus Gastronomie</div>
+                    <h2>Digitale Gastfreundschaft, die begeistert</h2>
+                    <p>
+                        Erleben Sie individuell gestaltete Gastro-Websites, die Lust auf mehr machen. Wir kombinieren appetitliches Design mit
+                        smarter Funktionalität, damit Gäste reservieren, bestellen und sich informieren können – überall und jederzeit.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Headless CMS für blitzschnelle Inhaltsaktualisierung durch Ihr Team</li>
+                        <li>Mehrsprachige Menüs, saisonale Highlights &amp; allergenfreundliche Darstellung</li>
+                        <li>Integration von Lieferdiensten, Reservierungs-Tools und Gutschein-Shops</li>
+                        <li>Marketing-Automation mit Newsletter, Social Ads &amp; Kampagnen-Tracking</li>
+                    </ul>
+                </div>
+                <div class="stat-card">
+                    <div class="badge">Warum Nordlicht IT?</div>
+                    <strong>+36% Online-Reservierungen</strong>
+                    <p>Im Durchschnitt steigern unsere Gastronomie-Projekte die Buchungen im ersten Jahr um 36 %.</p>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-badge">1</div>
+                            <div>
+                                <strong>Analyse &amp; Konzept</strong>
+                                Gemeinsamer Workshop, Zieldefinition, Wettbewerbsanalyse und Digitalstrategie.
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-badge">2</div>
+                            <div>
+                                <strong>Design &amp; Content</strong>
+                                UX-Design, Storytelling, Fotografie &amp; Copywriting für einen unverwechselbaren Auftritt.
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-badge">3</div>
+                            <div>
+                                <strong>Entwicklung &amp; Launch</strong>
+                                Technische Umsetzung, Hosting-Setup, Schulung Ihres Teams und kontinuierliche Betreuung.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="highlight">
+                        <strong>Signature Service:</strong> Digitale Speisekarte mit QR-Code &amp; Live-Management für Events, Wochenkarten und Specials.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="online-shop">
+            <div class="container">
+                <div class="section-header">
+                    <span class="badge">Nordlicht PC Shop</span>
+                    <h2>Konfigurieren &amp; bestellen Sie Ihren Wunsch-PC direkt bei Nordlicht IT Solutions</h2>
+                    <p>
+                        In unserem hauseigenen Shop stellen Sie Hardware, Services und Finanzierung flexibel zusammen.
+                        Wir bauen, testen und liefern Ihr System inklusive persönlicher Betreuung.
+                    </p>
+                </div>
+                <div class="shop-grid">
+                    <div class="shop-intro">
+                        <div class="shop-highlight">
+                            <h3>So funktioniert Ihr persönlicher PC-Shop</h3>
+                            <ol class="shop-steps">
+                                <li>Konfiguration starten und in Echtzeit prüfen, ob alle Komponenten harmonieren.</li>
+                                <li>Servicepakete wählen – von Montage bis Vor-Ort-Inbetriebnahme.</li>
+                                <li>Bestellanfrage absenden. Wir bestätigen innerhalb von 24&nbsp;Stunden und stimmen Details ab.</li>
+                            </ol>
+                        </div>
+                        <div class="mini-card">
+                            <strong>Gastro &amp; KMU ready</strong>
+                            <p>Auf Wunsch liefern wir inkl. Kassensystem, Office-Paket oder Küchenmonitoring – fertig eingerichtet.</p>
+                        </div>
+                        <div class="mini-card">
+                            <strong>Flexible Finanzierung</strong>
+                            <p>Bezahlen Sie per Rechnung, Leasing oder Ratenkauf – wir beraten Sie persönlich zu den Optionen.</p>
+                        </div>
+                    </div>
+                    <div class="configurator" aria-labelledby="configurator-heading">
+                        <h3 id="configurator-heading">PC-Konfigurator</h3>
+                        <form id="config-form" class="config-form">
+                            <div class="config-option">
+                                <label for="config-cpu">Prozessor</label>
+                                <select id="config-cpu" data-component data-label="Prozessor">
+                                    <option value="intel-i5" data-price="229">Intel Core i5-13400F – 10 Kerne</option>
+                                    <option value="intel-i7" data-price="389">Intel Core i7-13700KF – 16 Kerne</option>
+                                    <option value="ryzen-5" data-price="299">AMD Ryzen 5 7600 – 6 Kerne</option>
+                                    <option value="ryzen-7" data-price="469">AMD Ryzen 7 7800X3D – 8 Kerne</option>
+                                </select>
+                            </div>
+                            <div class="config-option">
+                                <label for="config-gpu">Grafikkarte</label>
+                                <select id="config-gpu" data-component data-label="Grafikkarte">
+                                    <option value="rtx4060ti" data-price="449">NVIDIA GeForce RTX 4060 Ti 8GB</option>
+                                    <option value="rtx4070s" data-price="639">NVIDIA GeForce RTX 4070 SUPER 12GB</option>
+                                    <option value="rx7800xt" data-price="549">AMD Radeon RX 7800 XT 16GB</option>
+                                    <option value="igpu" data-price="0">Business-Variante ohne dedizierte GPU (iGPU)</option>
+                                </select>
+                            </div>
+                            <div class="config-option">
+                                <label for="config-ram">Arbeitsspeicher</label>
+                                <select id="config-ram" data-component data-label="Arbeitsspeicher">
+                                    <option value="16gb" data-price="89">16&nbsp;GB DDR5-5600</option>
+                                    <option value="32gb" data-price="149">32&nbsp;GB DDR5-6000</option>
+                                    <option value="64gb" data-price="279">64&nbsp;GB DDR5-6000</option>
+                                </select>
+                            </div>
+                            <div class="config-option">
+                                <label for="config-storage">Speicher</label>
+                                <select id="config-storage" data-component data-label="Speicher">
+                                    <option value="1tb-nvme" data-price="109">1&nbsp;TB NVMe Gen4 SSD</option>
+                                    <option value="2tb-nvme" data-price="189">2&nbsp;TB NVMe Gen4 SSD</option>
+                                    <option value="combo" data-price="169">1&nbsp;TB NVMe + 2&nbsp;TB HDD</option>
+                                </select>
+                            </div>
+                            <div class="config-option">
+                                <label>Servicepakete</label>
+                                <div class="shop-addons">
+                                    <label class="shop-addon">
+                                        <input type="checkbox" data-addon data-label="Montage &amp; Burn-in-Test" data-price="129">
+                                        <div>
+                                            <strong>Montage &amp; Burn-in-Test</strong>
+                                            <span>Komplettaufbau, Kabelmanagement und 48-Stunden-Stresstest.</span>
+                                        </div>
+                                    </label>
+                                    <label class="shop-addon">
+                                        <input type="checkbox" data-addon data-label="Windows 11 Pro &amp; Einrichtung" data-price="169">
+                                        <div>
+                                            <strong>Windows 11 Pro &amp; Einrichtung</strong>
+                                            <span>Lizenz, Treiber, Sicherheitskonfiguration und individuelle Apps.</span>
+                                        </div>
+                                    </label>
+                                    <label class="shop-addon">
+                                        <input type="checkbox" data-addon data-label="Vor-Ort-Installation" data-price="149">
+                                        <div>
+                                            <strong>Vor-Ort-Installation</strong>
+                                            <span>Lieferung, Aufbau und Einbindung in Ihr Netzwerk vor Ort.</span>
+                                        </div>
+                                    </label>
+                                    <label class="shop-addon">
+                                        <input type="checkbox" data-addon data-label="Wartungsvertrag &amp; Monitoring (12 Monate)" data-price="228">
+                                        <div>
+                                            <strong>Wartungsvertrag &amp; Monitoring (12 Monate)</strong>
+                                            <span>Proaktive Updates, Security-Checks und Prioritäts-Support.</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="order-summary" aria-live="polite">
+                                <h4>Ihre Auswahl</h4>
+                                <ul class="summary-list"></ul>
+                                <div class="price-total">
+                                    <span>Gesamt</span>
+                                    <span data-total></span>
+                                </div>
+                                <small>Alle Preise in EUR inkl. gesetzl. MwSt. – Lieferung in 5–7 Werktagen nach Freigabe.</small>
+                            </div>
+                            <div class="config-option">
+                                <label for="customer-name">Name</label>
+                                <input type="text" id="customer-name" name="customer-name" placeholder="Ihr Name" required>
+                            </div>
+                            <div class="config-option">
+                                <label for="customer-email">E-Mail</label>
+                                <input type="email" id="customer-email" name="customer-email" placeholder="Ihre E-Mail-Adresse" required>
+                            </div>
+                            <div class="config-option">
+                                <label for="customer-phone">Telefon (optional)</label>
+                                <input type="tel" id="customer-phone" name="customer-phone" placeholder="Für Rückfragen">
+                            </div>
+                            <div class="config-option">
+                                <label for="customer-notes">Anmerkungen</label>
+                                <textarea id="customer-notes" name="customer-notes" placeholder="Zusatzwünsche, Einsatzgebiet oder Lieferadresse"></textarea>
+                            </div>
+                            <input type="hidden" id="hidden-configuration" name="konfiguration">
+                            <button class="cta-button" type="submit">Konfiguration anfragen</button>
+                            <div class="order-feedback" id="order-feedback" aria-live="polite"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section testimonials" id="referenzen">
+            <div class="container">
+                <div class="section-header">
+                    <span class="badge" style="background: rgba(255,255,255,0.12); color:#fff;">Ergebnisse, die überzeugen</span>
+                    <h2>Referenzen &amp; Stimmen unserer Kunden</h2>
+                    <p>
+                        Langfristige Partnerschaften sind unser Anspruch. Wir arbeiten eng mit Inhabern und Teams zusammen,
+                        um digitale Produkte zu entwickeln, die begeistern und Umsatz generieren.
+                    </p>
+                </div>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <p>"Dank Nordlicht IT Solutions haben wir eine Website, auf der unsere Menüs tagesaktuell gepflegt werden.
+                            Die Online-Reservierungen sind innerhalb weniger Monate um 40% gestiegen."</p>
+                        <h4>Restaurant Seeluft</h4>
+                        <span>Fine Dining &amp; Eventlocation</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"Der PC-Konfigurator ist ein Gamechanger. Kunden stellen sich ihre Systeme selbst zusammen,
+                            und wir erhalten automatisch passende Bestellungen mit allen Details."</p>
+                        <h4>ByteBox Handelspartner</h4>
+                        <span>IT-Fachhändler</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"Vom Logo über die Website bis zum Hosting – alles aus einem Guss. Der Support reagiert schnell und professionell,
+                            egal ob es um Hardware oder Software geht."</p>
+                        <h4>Küstenwerkstatt</h4>
+                        <span>Handwerksbetrieb</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="faq">
+            <div class="container">
+                <div class="section-header">
+                    <span class="badge">FAQs</span>
+                    <h2>Häufige Fragen unserer Kunden</h2>
+                    <p>Transparenz ist uns wichtig. Deshalb beantworten wir die wichtigsten Fragen bereits im Vorfeld.</p>
+                </div>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>Wie läuft ein Projektstart ab?</h4>
+                        <p>Wir beginnen mit einem kostenlosen Erstgespräch, analysieren Ihre Ziele und erstellen ein individuelles Angebot mit klarer Roadmap.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Übernehmt ihr auch bestehende Webseiten?</h4>
+                        <p>Ja. Wir migrieren Inhalte, optimieren Performance und übernehmen Domain-Transfer, Hosting &amp; Support – inklusive Datenschutz-Check.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Welche Service-Level bietet ihr beim Hosting?</h4>
+                        <p>Monitoring rund um die Uhr, garantierte Reaktionszeiten, tägliche Backups sowie Domainverwaltung und monatliche SEO-Reports.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Wie schnell repariert ihr defekte PCs?</h4>
+                        <p>In Notfällen noch am gleichen Tag – remote oder vor Ort. Standardfälle bearbeiten wir innerhalb von 48 Stunden.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="kontakt">
+            <div class="container">
+                <div class="cta-section">
+                    <span class="badge" style="background: rgba(255, 255, 255, 0.18); color:#fff;">Nächster Schritt</span>
+                    <h2>Bereit für Ihren digitalen Vorsprung?</h2>
+                    <p>
+                        Sichern Sie sich jetzt Ihre unverbindliche Erstberatung. Gemeinsam entwickeln wir eine digitale Strategie,
+                        die genau zu Ihren Gästen, Kunden und Teams passt.
+                    </p>
+                    <div class="cta-actions">
+                        <a class="cta-button" href="tel:+49401234567">Jetzt anrufen</a>
+                        <a class="cta-secondary" href="mailto:hello@nordlicht-it.de">hello@nordlicht-it.de</a>
+                    </div>
+                </div>
+
+                <div class="contact-section">
+                    <div class="contact-card" aria-label="Kontaktinformationen">
+                        <div class="badge">Kontakt</div>
+                        <h3>Nordlicht IT Solutions</h3>
+                        <p>Ihr Partner für Webdesign, Hosting, PC-Services und E-Commerce-Lösungen.</p>
+                        <ul>
+                            <li>
+                                <span>Telefon</span>
+                                <a href="tel:+49401234567">+49 40 123 45 67</a>
+                            </li>
+                            <li>
+                                <span>E-Mail</span>
+                                <a href="mailto:hello@nordlicht-it.de">hello@nordlicht-it.de</a>
+                            </li>
+                            <li>
+                                <span>Standort</span>
+                                Hafenstraße 12, 20095 Hamburg
+                            </li>
+                            <li>
+                                <span>Supportzeiten</span>
+                                Mo–Fr 8:00–18:00 Uhr &amp; nach Vereinbarung
+                            </li>
+                        </ul>
+                    </div>
+                    <form aria-label="Kontaktformular">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Ihr Name" required>
+
+                        <label for="email">E-Mail</label>
+                        <input type="email" id="email" name="email" placeholder="Ihre E-Mail-Adresse" required>
+
+                        <label for="unternehmen">Unternehmen</label>
+                        <input type="text" id="unternehmen" name="unternehmen" placeholder="Firmenname">
+
+                        <label for="nachricht">Projektbeschreibung</label>
+                        <textarea id="nachricht" name="nachricht" placeholder="Beschreiben Sie Ihr Vorhaben" required></textarea>
+
+                        <button class="cta-button" type="submit">Anfrage senden</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">Nordlicht IT Solutions</div>
+                    <p>Strategie, Design, Technologie und Support – vereint in einer Agentur für ambitionierte Gastro- und KMU-Projekte.</p>
+                </div>
+                <div>
+                    <h4>Leistungen</h4>
+                    <ul class="footer-links">
+                        <li><a href="#leistungen">Webdesign &amp; Markenaufbau</a></li>
+                        <li><a href="#branchen">Gastro-Digitalisierung</a></li>
+                        <li><a href="#online-shop">E-Commerce &amp; Konfigurator</a></li>
+                        <li><a href="#kontakt">PC-Service &amp; Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Ressourcen</h4>
+                    <ul class="footer-links">
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#referenzen">Kundenstimmen</a></li>
+                        <li><a href="#kontakt">Support anfordern</a></li>
+                        <li><a href="mailto:hello@nordlicht-it.de">Partner werden</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="legal">
+                &copy; <span id="year"></span> Nordlicht IT Solutions. Alle Rechte vorbehalten. | Datenschutz &amp; Impressum auf Anfrage.
+            </div>
+        </div>
+    </footer>
+    <script>
+        (function () {
+            const formatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' });
+            const form = document.getElementById('config-form');
+            const yearEl = document.getElementById('year');
+
+            if (yearEl) {
+                yearEl.textContent = new Date().getFullYear();
+            }
+
+            if (!form) {
+                return;
+            }
+
+            const summaryList = form.querySelector('.summary-list');
+            const totalEl = form.querySelector('[data-total]');
+            const hiddenField = form.querySelector('#hidden-configuration');
+            const feedback = document.getElementById('order-feedback');
+            const componentSelects = form.querySelectorAll('select[data-component]');
+            const addonInputs = form.querySelectorAll('input[data-addon]');
+            const contactFields = form.querySelectorAll('input[name="customer-name"], input[name="customer-email"], input[name="customer-phone"], textarea[name="customer-notes"]');
+
+            const hideFeedback = () => {
+                if (feedback) {
+                    feedback.classList.remove('is-visible');
+                    feedback.textContent = '';
+                }
+            };
+
+            const updateSummary = () => {
+                if (!summaryList || !totalEl || !hiddenField) {
+                    return;
+                }
+
+                summaryList.innerHTML = '';
+                let total = 0;
+                const lines = [];
+
+                componentSelects.forEach((select) => {
+                    const option = select.options[select.selectedIndex];
+                    const price = Number(option?.dataset.price || 0);
+                    total += price;
+                    const label = select.dataset.label || '';
+                    const item = document.createElement('li');
+                    item.innerHTML = `<span>${label}</span><span>${formatter.format(price)}</span>`;
+                    summaryList.appendChild(item);
+                    if (option) {
+                        lines.push(`${label}: ${option.textContent.trim()} (${formatter.format(price)})`);
+                    }
+                });
+
+                addonInputs.forEach((addon) => {
+                    if (addon.checked) {
+                        const price = Number(addon.dataset.price || 0);
+                        total += price;
+                        const label = addon.dataset.label || addon.nextElementSibling?.querySelector('strong')?.textContent || 'Servicepaket';
+                        const item = document.createElement('li');
+                        item.innerHTML = `<span>${label}</span><span>${formatter.format(price)}</span>`;
+                        summaryList.appendChild(item);
+                        lines.push(`${label}: ${formatter.format(price)}`);
+                    }
+                });
+
+                totalEl.textContent = formatter.format(total);
+                lines.push(`Gesamt: ${formatter.format(total)}`);
+                hiddenField.value = lines.join('\n');
+            };
+
+            const handleChange = () => {
+                hideFeedback();
+                updateSummary();
+            };
+
+            componentSelects.forEach((select) => {
+                select.addEventListener('change', handleChange);
+            });
+
+            addonInputs.forEach((addon) => {
+                addon.addEventListener('change', handleChange);
+            });
+
+            contactFields.forEach((field) => {
+                field.addEventListener('input', hideFeedback);
+            });
+
+            updateSummary();
+
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                if (feedback) {
+                    feedback.textContent = 'Vielen Dank! Wir prüfen Ihre Konfiguration und melden uns innerhalb von 24 Stunden mit der Auftragsbestätigung.';
+                    feedback.classList.add('is-visible');
+                }
+
+                form.reset();
+                updateSummary();
+            });
+        })();
+    </script>
+</body>
+</html>
