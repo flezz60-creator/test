@@ -1004,7 +1004,200 @@
             </div>
         </div>
         <script>
-            document.getElementById('year').textContent = new Date().getFullYear();
+            (function () {
+                const yearElement = document.getElementById('year');
+                if (yearElement) {
+                    yearElement.textContent = new Date().getFullYear();
+                }
+
+                const configForm = document.getElementById('config-form');
+                if (!configForm) {
+                    return;
+                }
+
+                const hiddenConfigField = document.getElementById('hidden-configuration');
+                const submitButton = configForm.querySelector('[type="submit"]');
+                const statusElement = document.querySelector('[data-config-status]') || document.getElementById('config-status');
+                const summaryElements = Array.from(document.querySelectorAll('[data-config-summary], #configuration-summary, .configurator-summary'));
+                const successMessageFallback = configForm.dataset.successMessage || 'Vielen Dank! Ihre Konfiguration wurde erfolgreich übermittelt.';
+                const errorMessageFallback = configForm.dataset.errorMessage || 'Leider konnte Ihre Konfiguration nicht gesendet werden. Bitte versuchen Sie es erneut.';
+                const sendingMessage = configForm.dataset.loadingMessage || 'Wir senden Ihre Konfiguration …';
+
+                if (statusElement) {
+                    statusElement.setAttribute('role', 'status');
+                    if (!statusElement.getAttribute('aria-live')) {
+                        statusElement.setAttribute('aria-live', 'polite');
+                    }
+                }
+
+                const setStatus = (state, message) => {
+                    if (!statusElement) {
+                        return;
+                    }
+                    statusElement.textContent = message;
+                    statusElement.dataset.state = state;
+                    statusElement.classList.remove('is-success', 'is-error', 'is-loading');
+                    if (state === 'loading') {
+                        statusElement.classList.add('is-loading');
+                    } else if (state === 'success') {
+                        statusElement.classList.add('is-success');
+                    } else if (state === 'error') {
+                        statusElement.classList.add('is-error');
+                    }
+                };
+
+                const resetSummary = () => {
+                    if (typeof window.resetConfiguratorSummary === 'function') {
+                        window.resetConfiguratorSummary();
+                        return;
+                    }
+                    summaryElements.forEach((element) => {
+                        if ('value' in element) {
+                            element.value = '';
+                        } else {
+                            element.textContent = '';
+                        }
+                        element.classList?.add('is-empty');
+                    });
+                };
+
+                const resolveEndpoint = () => configForm.getAttribute('action') || configForm.dataset.endpoint;
+
+                const resolveMethod = () => {
+                    const method = configForm.getAttribute('method');
+                    if (!method) {
+                        return 'POST';
+                    }
+                    return method.toUpperCase() === 'GET' ? 'POST' : method.toUpperCase();
+                };
+
+                configForm.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+
+                    const endpoint = resolveEndpoint();
+                    if (!endpoint) {
+                        console.error('Kein Endpoint für die Bestellübermittlung konfiguriert.');
+                        setStatus('error', errorMessageFallback);
+                        return;
+                    }
+
+                    const formData = new FormData(configForm);
+                    const configFieldName = hiddenConfigField ? hiddenConfigField.name || hiddenConfigField.id || 'hidden-configuration' : 'hidden-configuration';
+
+                    const rawConfiguration = formData.get(configFieldName) || (hiddenConfigField ? hiddenConfigField.value : '');
+                    if (formData.has(configFieldName)) {
+                        formData.delete(configFieldName);
+                    }
+
+                    const customer = {};
+                    for (const [key, value] of formData.entries()) {
+                        if (value == null || value === '') {
+                            continue;
+                        }
+                        if (Object.prototype.hasOwnProperty.call(customer, key)) {
+                            const existing = customer[key];
+                            if (Array.isArray(existing)) {
+                                existing.push(value);
+                            } else {
+                                customer[key] = [existing, value];
+                            }
+                        } else {
+                            customer[key] = value;
+                        }
+                    }
+
+                    let parsedConfiguration = null;
+                    if (typeof rawConfiguration === 'string' && rawConfiguration.trim().length) {
+                        try {
+                            parsedConfiguration = JSON.parse(rawConfiguration);
+                        } catch {
+                            parsedConfiguration = null;
+                        }
+                    }
+
+                    const payload = {
+                        configuration: parsedConfiguration ?? rawConfiguration,
+                        configurationRaw: typeof rawConfiguration === 'string' ? rawConfiguration : '',
+                        customer,
+                    };
+
+                    if (parsedConfiguration !== null) {
+                        payload.components = parsedConfiguration;
+                    }
+
+                    if (statusElement) {
+                        setStatus('loading', sendingMessage);
+                    }
+                    if (submitButton) {
+                        submitButton.disabled = true;
+                    }
+                    configForm.classList.add('is-submitting');
+                    configForm.dataset.state = 'loading';
+
+                    try {
+                        const response = await fetch(endpoint, {
+                            method: resolveMethod(),
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json, text/plain;q=0.9, */*;q=0.8',
+                            },
+                            body: JSON.stringify(payload),
+                        });
+
+                        const contentType = response.headers.get('content-type') || '';
+                        let responseData = null;
+                        if (contentType.includes('application/json')) {
+                            try {
+                                responseData = await response.json();
+                            } catch {
+                                responseData = null;
+                            }
+                        } else if (contentType.includes('text/')) {
+                            try {
+                                responseData = await response.text();
+                            } catch {
+                                responseData = null;
+                            }
+                        }
+
+                        if (!response.ok) {
+                            const fallbackMessage = (responseData && typeof responseData === 'object' && responseData !== null && 'message' in responseData && typeof responseData.message === 'string')
+                                ? responseData.message
+                                : (typeof responseData === 'string' && responseData.trim() ? responseData.trim() : errorMessageFallback);
+                            throw new Error(fallbackMessage);
+                        }
+
+                        const successMessage = (responseData && typeof responseData === 'object' && responseData !== null && 'message' in responseData && typeof responseData.message === 'string')
+                            ? responseData.message
+                            : successMessageFallback;
+
+                        setStatus('success', successMessage);
+                        configForm.dataset.state = 'success';
+
+                        configForm.reset();
+                        if (hiddenConfigField) {
+                            hiddenConfigField.value = '';
+                        }
+                        resetSummary();
+                        configForm.dispatchEvent(new CustomEvent('config:submitted', {
+                            detail: {
+                                payload,
+                                response: responseData,
+                            },
+                        }));
+                    } catch (error) {
+                        console.error('Senden der Konfiguration fehlgeschlagen:', error);
+                        const message = error instanceof Error && error.message ? error.message : errorMessageFallback;
+                        setStatus('error', message);
+                        configForm.dataset.state = 'error';
+                    } finally {
+                        if (submitButton) {
+                            submitButton.disabled = false;
+                        }
+                        configForm.classList.remove('is-submitting');
+                    }
+                });
+            })();
         </script>
     </footer>
 </body>
