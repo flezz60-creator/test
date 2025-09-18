@@ -556,6 +556,38 @@
             min-height: 160px;
         }
 
+        .form-message {
+            border: 1px solid transparent;
+            border-radius: var(--radius-sm);
+            padding: 0.85rem 1rem;
+            font-size: 0.9rem;
+            background: rgba(15, 45, 85, 0.04);
+            color: var(--text-muted);
+            margin-top: -0.2rem;
+            opacity: 0;
+            transform: translateY(-4px);
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .form-message.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .form-message.success {
+            background: rgba(26, 110, 242, 0.12);
+            border-color: rgba(26, 110, 242, 0.3);
+            color: var(--primary);
+        }
+
+        .form-message.error {
+            background: rgba(217, 45, 32, 0.12);
+            border-color: rgba(217, 45, 32, 0.4);
+            color: #b42318;
+        }
+
         .contact-card {
             background: var(--card-bg);
             border-radius: var(--radius-md);
@@ -953,7 +985,7 @@
                             </li>
                         </ul>
                     </div>
-                    <form aria-label="Kontaktformular">
+                    <form aria-label="Kontaktformular" action="https://crm.nordlicht-it.de/api/contact" method="post">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" placeholder="Ihr Name" required>
 
@@ -967,6 +999,7 @@
                         <textarea id="nachricht" name="nachricht" placeholder="Beschreiben Sie Ihr Vorhaben" required></textarea>
 
                         <button class="cta-button" type="submit">Anfrage senden</button>
+                        <p class="form-message" role="status" aria-live="polite" aria-hidden="true"></p>
                     </form>
                 </div>
             </div>
@@ -1005,6 +1038,97 @@
         </div>
         <script>
             document.getElementById('year').textContent = new Date().getFullYear();
+
+            const contactForm = document.querySelector('#kontakt form');
+
+            if (contactForm) {
+                const statusBox = contactForm.querySelector('.form-message');
+                const submitButton = contactForm.querySelector('button[type="submit"]');
+
+                const updateStatus = (type, message) => {
+                    if (!statusBox) {
+                        return;
+                    }
+
+                    statusBox.classList.remove('success', 'error');
+                    statusBox.classList.add('is-visible');
+
+                    if (type) {
+                        statusBox.classList.add(type);
+                    }
+
+                    statusBox.textContent = message;
+                    statusBox.setAttribute('aria-hidden', 'false');
+                };
+
+                contactForm.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+
+                    const formData = new FormData(contactForm);
+                    const payload = {
+                        name: (formData.get('name') || '').toString().trim(),
+                        email: (formData.get('email') || '').toString().trim(),
+                        unternehmen: (formData.get('unternehmen') || '').toString().trim(),
+                        nachricht: (formData.get('nachricht') || '').toString().trim()
+                    };
+
+                    if (!payload.name || !payload.email || !payload.nachricht) {
+                        updateStatus('error', 'Bitte füllen Sie alle Pflichtfelder aus.');
+                        return;
+                    }
+
+                    let originalButtonText = '';
+
+                    if (submitButton) {
+                        originalButtonText = submitButton.textContent;
+                        submitButton.disabled = true;
+                        submitButton.textContent = 'Wird gesendet…';
+                    }
+
+                    updateStatus(null, 'Ihre Nachricht wird gesendet…');
+
+                    try {
+                        const response = await fetch(contactForm.action, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`Request failed with status ${response.status}`);
+                        }
+
+                        let serverMessage = 'Danke! Ihre Nachricht wurde versendet.';
+                        const contentType = response.headers.get('content-type');
+
+                        if (contentType && contentType.includes('application/json')) {
+                            try {
+                                const data = await response.json();
+
+                                if (data && typeof data.message === 'string' && data.message.trim() !== '') {
+                                    serverMessage = data.message.trim();
+                                }
+                            } catch (parseError) {
+                                console.warn('Antwort konnte nicht als JSON gelesen werden.', parseError);
+                            }
+                        }
+
+                        updateStatus('success', serverMessage);
+                        contactForm.reset();
+                    } catch (error) {
+                        console.error('Kontaktformular konnte nicht gesendet werden:', error);
+                        updateStatus('error', 'Entschuldigung, es gab ein Problem beim Senden. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt an hello@nordlicht-it.de.');
+                    } finally {
+                        if (submitButton) {
+                            submitButton.disabled = false;
+                            submitButton.textContent = originalButtonText;
+                        }
+                    }
+                });
+            }
         </script>
     </footer>
 </body>
