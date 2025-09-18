@@ -38,25 +38,54 @@ if (contactForm) {
             return;
         }
 
+        const encodedData = new URLSearchParams();
+
+        Object.entries(payload).forEach(([key, value]) => {
+            encodedData.append(key, value);
+        });
+
         let originalButtonText = '';
 
         if (submitButton) {
             originalButtonText = submitButton.textContent;
             submitButton.disabled = true;
             submitButton.textContent = 'Wird gesendet…';
+            submitButton.setAttribute('aria-busy', 'true');
         }
 
         updateStatus(null, 'Ihre Nachricht wird gesendet…');
 
         try {
-            const response = await fetch(contactForm.action, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            });
+            const method = (contactForm.getAttribute('method') || 'post').toUpperCase();
+            const headers = {
+                'Accept': 'application/json, text/plain, */*'
+            };
+            let requestUrl = contactForm.action;
+            let requestBody = null;
+
+            if (method === 'GET' || method === 'HEAD') {
+                const url = new URL(requestUrl, window.location.origin);
+
+                encodedData.forEach((value, key) => {
+                    url.searchParams.set(key, value);
+                });
+
+                requestUrl = url.toString();
+            } else {
+                headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+                requestBody = encodedData.toString();
+            }
+
+            const requestOptions = {
+                method,
+                headers
+            };
+
+            if (requestBody !== null) {
+                requestOptions.body = requestBody;
+            }
+
+            const response = await fetch(requestUrl, requestOptions);
 
             if (!response.ok) {
                 throw new Error(`Request failed with status ${response.status}`);
@@ -86,6 +115,7 @@ if (contactForm) {
             if (submitButton) {
                 submitButton.disabled = false;
                 submitButton.textContent = originalButtonText;
+                submitButton.removeAttribute('aria-busy');
             }
         }
     });

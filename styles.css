@@ -121,6 +121,14 @@ main {
     position: relative;
 }
 
+.hero .cta-actions {
+    margin-top: 2rem;
+}
+
+.hero .stacked-cards {
+    margin-top: 2rem;
+}
+
 .hero::before {
     content: "";
     position: absolute;
@@ -167,6 +175,10 @@ h1 {
     box-shadow: var(--shadow-soft);
     border: 1px solid var(--border);
     overflow: hidden;
+}
+
+.hero-card--raised {
+    box-shadow: var(--shadow-hover);
 }
 
 .hero-card::after {
@@ -229,6 +241,16 @@ h3 {
     font-size: 0.85rem;
     font-weight: 500;
     color: var(--text-muted);
+}
+
+.badge--inverted {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+.badge--inverted-strong {
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
 }
 
 .services, .section {
@@ -325,6 +347,10 @@ h3 {
     display: grid;
     gap: 1rem;
     margin-top: 1.8rem;
+}
+
+.feature-list--compact {
+    margin-top: 1.6rem;
 }
 
 .feature-list li {
