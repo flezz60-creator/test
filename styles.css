@@ -1,0 +1,423 @@
+:root {
+  color-scheme: light dark;
+  --bg: #101820;
+  --surface: #182430;
+  --surface-alt: #21313f;
+  --text: #f6f8fa;
+  --accent: #00c2ff;
+  --hit: #30d158;
+  --present: #f7b500;
+  --miss: #3d3f45;
+  --tile-border: #2a3745;
+  --keyboard-bg: #1f2b38;
+  --keyboard-text: #e2e7ec;
+  --keyboard-hit: #30d158;
+  --keyboard-present: #f7b500;
+  --keyboard-miss: #3d3f45;
+  --tile-size: clamp(3.2rem, 6vw, 4.2rem);
+  --tile-gap: 0.5rem;
+  --transition: 180ms ease;
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, rgba(0, 194, 255, 0.16), transparent 55%), var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+}
+
+body.high-contrast {
+  --hit: #ffbd2e;
+  --present: #1ec8ff;
+  --miss: #606368;
+  --keyboard-hit: #ffbd2e;
+  --keyboard-present: #1ec8ff;
+  --keyboard-miss: #606368;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem clamp(1rem, 5vw, 4rem);
+  background: rgba(16, 24, 32, 0.85);
+  border-bottom: 1px solid #233140;
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+}
+
+.brand .tagline {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.mode-button {
+  padding: 0.6rem 1.2rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  color: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform var(--transition), background var(--transition);
+}
+
+.mode-button.active,
+.mode-button:hover {
+  background: var(--accent);
+  color: #0d1824;
+  transform: translateY(-2px);
+}
+
+.icon-button {
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: inherit;
+  transition: transform var(--transition);
+}
+
+.icon-button:hover {
+  transform: rotate(20deg);
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(1rem, 4vw, 2rem);
+}
+
+.status-panel {
+  margin-bottom: 1rem;
+  min-height: 2rem;
+  text-align: center;
+}
+
+.status-message {
+  font-size: 1rem;
+  min-height: 1.5rem;
+}
+
+.countdown {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  width: min(100%, 36rem);
+}
+
+.board {
+  display: grid;
+  gap: var(--tile-gap);
+  justify-items: center;
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--tile-size), 1fr));
+  gap: var(--tile-gap);
+  width: 100%;
+}
+
+.tile {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 2px solid var(--tile-border);
+  display: grid;
+  place-items: center;
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  text-transform: uppercase;
+  font-weight: 700;
+  background: rgba(22, 30, 40, 0.85);
+  border-radius: 0.6rem;
+  transition: background var(--transition), transform 180ms ease, border var(--transition);
+}
+
+.tile.filled {
+  border-color: var(--accent);
+  transform: scale(1.04);
+}
+
+.tile.hit {
+  background: var(--hit);
+  color: #0c160e;
+  border-color: transparent;
+}
+
+.tile.present {
+  background: var(--present);
+  color: #0f1305;
+  border-color: transparent;
+}
+
+.tile.miss {
+  background: var(--miss);
+  color: #d7d8db;
+  border-color: transparent;
+}
+
+.tile.flip {
+  animation: flip 460ms ease forwards;
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+.keyboard {
+  display: grid;
+  gap: 0.35rem;
+  width: 100%;
+  user-select: none;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.key {
+  flex: 1;
+  padding: 0.75rem;
+  background: var(--keyboard-bg);
+  border: none;
+  color: var(--keyboard-text);
+  border-radius: 0.65rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: transform var(--transition), background var(--transition);
+}
+
+.key[data-key="enter"],
+.key[data-key="backspace"] {
+  flex: 1.5;
+  font-size: 0.9rem;
+}
+
+.key.hit {
+  background: var(--keyboard-hit);
+  color: #0c160e;
+}
+
+.key.present {
+  background: var(--keyboard-present);
+  color: #0f1305;
+}
+
+.key.miss {
+  background: var(--keyboard-miss);
+}
+
+.key:active {
+  transform: translateY(1px);
+}
+
+.app-footer {
+  padding: 1.5rem clamp(1rem, 5vw, 4rem);
+  background: rgba(16, 24, 32, 0.75);
+  border-top: 1px solid #233140;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.modal {
+  border: none;
+  border-radius: 1rem;
+  padding: 0;
+  max-width: min(92vw, 28rem);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.modal::backdrop {
+  background: rgba(4, 12, 20, 0.6);
+}
+
+.modal form {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal h2 {
+  margin: 0;
+}
+
+.modal fieldset {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.8rem;
+  padding: 1rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.modal label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.95rem;
+}
+
+.modal input[type="number"],
+.modal select {
+  background: var(--surface-alt);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  color: var(--text);
+}
+
+.modal input[type="checkbox"] {
+  transform: scale(1.1);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.modal button {
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.modal button.primary {
+  background: var(--accent);
+  color: #03121a;
+}
+
+.stats {
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.stats .stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+  gap: 0.5rem;
+}
+
+.stat-card {
+  background: var(--surface-alt);
+  padding: 0.8rem;
+  border-radius: 0.75rem;
+  text-align: center;
+}
+
+.stat-card .value {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.guess-distribution {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.guess-distribution .bar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.35rem;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.guess-distribution .bar span.progress {
+  height: 0.6rem;
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+.toast {
+  position: fixed;
+  top: 5.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(4, 12, 20, 0.88);
+  color: #f7f9fb;
+  padding: 0.75rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, -0.5rem);
+}
+
+@media (max-width: 600px) {
+  .app-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .mode-button {
+    flex: 1;
+  }
+
+  .keyboard-row {
+    gap: 0.25rem;
+  }
+
+  .key {
+    padding: 0.6rem 0.4rem;
+  }
+}
