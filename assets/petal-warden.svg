@@ -1,0 +1,59 @@
+<svg width="512" height="704" viewBox="0 0 512 704" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="petal-bg" x1="256" y1="0" x2="256" y2="704" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#122238" />
+      <stop offset="1" stop-color="#04100f" />
+    </linearGradient>
+    <radialGradient id="petal-glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(256 320) scale(220 200)">
+      <stop offset="0" stop-color="#9ff3e2" stop-opacity="0.95" />
+      <stop offset="1" stop-color="#0f3f39" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="petal-dress" x1="256" y1="240" x2="256" y2="620" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e9f2ff" />
+      <stop offset="1" stop-color="#66c1a8" />
+    </linearGradient>
+    <radialGradient id="petal-eyes" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(0 0) scale(1)">
+      <stop stop-color="#fefefe" />
+      <stop offset="1" stop-color="#80fffb" />
+    </radialGradient>
+  </defs>
+  <rect width="512" height="704" rx="42" fill="url(#petal-bg)" />
+  <circle cx="256" cy="320" r="220" fill="url(#petal-glow)" />
+  <g opacity="0.2" stroke="#97f4dd" stroke-width="8">
+    <path d="M74 200c76-42 128-60 182-60 58 0 130 22 198 60" />
+    <path d="M52 282c90-48 152-74 204-74 50 0 114 26 204 74" />
+    <path d="M98 360c60-28 118-40 158-40 40 0 102 12 158 40" />
+  </g>
+  <g filter="url(#petal-shadow)">
+    <path d="M256 140c-62 0-112 52-120 112 46-18 88-20 120 12 30-32 74-34 120-12-6-60-58-112-120-112z" fill="#edf9ff" />
+    <path d="M186 226c-42 48-66 112-66 182 22-16 50-18 74-10 32 10 52 10 84 0 30-8 56-6 80 12 10-82-20-150-64-184-26-20-56-22-108 0z" fill="#fff" opacity="0.7" />
+    <path d="M160 330c-32 52-52 134-46 202 30-36 60-44 96-30 28 12 52 14 86 6 28-6 58 2 92 32 2-88-26-170-64-208-28-28-82-36-90-68-6-26-22-42-42-42-22 0-42 16-32 46z" fill="url(#petal-dress)" />
+  </g>
+  <g>
+    <circle cx="220" cy="250" r="18" fill="#101a1d" stroke="#a9f1db" stroke-width="4" />
+    <circle cx="220" cy="250" r="8" fill="url(#petal-eyes)" />
+    <circle cx="292" cy="250" r="18" fill="#101a1d" stroke="#a9f1db" stroke-width="4" />
+    <circle cx="292" cy="250" r="8" fill="url(#petal-eyes)" />
+  </g>
+  <path d="M216 300c26 26 60 26 84 0" stroke="#0f2324" stroke-width="12" stroke-linecap="round" />
+  <g fill="#f9ffe7" opacity="0.5">
+    <path d="M134 412c32-52 78-72 120-72 44 0 96 26 138 84-58-16-88-10-128 20-34 26-80 20-130-32z" />
+    <path d="M104 520c44-62 104-74 156-56 40 14 72 12 118 0-24 44-56 74-92 90-36 16-88 12-150-14-12-4-22-8-32-20z" />
+  </g>
+  <g fill="#68d6c4" opacity="0.7">
+    <path d="M96 168l30 18-12-36" />
+    <path d="M420 196l-42 26 14-38" />
+    <circle cx="88" cy="368" r="14" />
+    <circle cx="424" cy="340" r="18" />
+  </g>
+  <g stroke="#b2ffee" stroke-width="10" stroke-linecap="round" opacity="0.5">
+    <path d="M150 620l-36 58" />
+    <path d="M362 614l44 60" />
+  </g>
+  <text x="50%" y="660" fill="#c3fff2" font-family="'Press Start 2P', monospace" font-size="32" text-anchor="middle">Petal Warden</text>
+  <defs>
+    <filter id="petal-shadow" x="96" y="140" width="320" height="500" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="20" stdDeviation="30" flood-color="#041215" flood-opacity="0.6" />
+    </filter>
+  </defs>
+</svg>
