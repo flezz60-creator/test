@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Collection Fever – Rare Hunt</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script defer src="main.js"></script>
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="top-bar">
+        <span class="badge">Indie Prototype</span>
+        <ul class="nav-links">
+          <li><a href="#loop">Retention-Loop</a></li>
+          <li><a href="#daily">Daily Bonus</a></li>
+          <li><a href="#pack-lab">Pack-Labor</a></li>
+          <li><a href="#collection">Sammlung</a></li>
+          <li><a href="#multiplayer">Arena</a></li>
+        </ul>
+      </nav>
+      <div class="hero-content">
+        <p class="label">Pixelverse Studio präsentiert</p>
+        <h1>Collection Fever – Rare Hunt</h1>
+        <p class="lede">
+          Ein atmosphärisches Indie-Sammelabenteuer. Öffne Booster, jage nach
+          ultra-seltenen Artefakten und fühle den Nervenkitzel jedes Fundes.
+        </p>
+        <div class="hero-actions">
+          <button id="cta-open-pack" class="primary">Jetzt Booster öffnen</button>
+          <button id="cta-explore" class="ghost">Sammlung entdecken</button>
+        </div>
+        <div class="meta">
+          <div>
+            <span class="meta-label">Seltenste Karte</span>
+            <span class="meta-value" id="legendary-highlight">–</span>
+          </div>
+          <div>
+            <span class="meta-label">Aktive Sets</span>
+            <span class="meta-value" id="active-set-count">0</span>
+          </div>
+          <div>
+            <span class="meta-label">Login-Streak</span>
+            <span class="meta-value" id="hero-streak">0</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="loop" class="panel loop">
+        <h2>Retention-Loop</h2>
+        <div class="loop-grid">
+          <article>
+            <h3>Trigger</h3>
+            <p>
+              Limitierte Events und tägliche Login-Reminders holen dich in die
+              Welt zurück – verpasse keine rare Chance!
+            </p>
+          </article>
+          <article>
+            <h3>Action</h3>
+            <p>
+              Drehe das Schicksalsrad, meistere Mini-Quests und öffne Booster.
+              Jede Entscheidung erhöht die Spannung.
+            </p>
+          </article>
+          <article>
+            <h3>Reward</h3>
+            <p>
+              Variable Drops mit opulenten Reveal-Animationen liefern den
+              Indie-typischen Dopamin-Kick.
+            </p>
+          </article>
+          <article>
+            <h3>Investment</h3>
+            <p>
+              Sortiere deine Alben, handle doppelte Karten und vervollständige
+              legendäre Sets für Ruhm auf dem Leaderboard.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="daily" class="panel daily">
+        <div class="panel-header">
+          <h2>Daily Login Ritual</h2>
+          <p>
+            Halte deinen Streak am Leben, kassiere wachsende Belohnungen und
+            unlocke spezielle Event-Tickets.
+          </p>
+        </div>
+        <div class="daily-grid">
+          <div class="login-card">
+            <div class="streak">
+              <span>Streak</span>
+              <strong id="daily-streak">0</strong>
+            </div>
+            <button id="claim-login" class="primary">Belohnung abholen</button>
+            <p class="login-status" id="login-status">Bereit für deinen Bonus!</p>
+            <div class="next-reward">
+              <span>Nächster Meilenstein</span>
+              <p id="next-milestone">Tag 7: Garantierte epische Karte</p>
+            </div>
+          </div>
+          <div class="reward-preview">
+            <h3>Heutige Belohnung</h3>
+            <div class="reward-display" id="daily-reward-display">
+              <p>Hole dir den Bonus, um deine Überraschung zu enthüllen.</p>
+            </div>
+            <small>
+              Tipp: Schließe wöchentliche Quests, um zusätzliche Login-Siegel
+              für das Event zu verdienen.
+            </small>
+          </div>
+        </div>
+      </section>
+
+      <section id="pack-lab" class="panel packs">
+        <div class="panel-header">
+          <h2>Booster-Labor</h2>
+          <p>
+            Wähle dein Set, öffne ein Pack und erlebe die Spannung dynamischer
+            Drop-Rates.
+          </p>
+        </div>
+        <div class="pack-controls">
+          <label for="pack-select">Set-Auswahl</label>
+          <select id="pack-select" aria-label="Booster wählen"></select>
+          <button id="open-pack" class="primary">Pack öffnen</button>
+        </div>
+        <div class="pack-results" id="pack-results">
+          <p class="placeholder">Noch keine Karten – öffne dein erstes Pack!</p>
+        </div>
+      </section>
+
+      <section id="collection" class="panel collection">
+        <div class="panel-header">
+          <h2>Sammlungs-Atlas</h2>
+          <p>
+            Behalte deine Fortschritte im Blick, vervollständige Sets und
+            sichere dir mystische Boni.
+          </p>
+        </div>
+        <div class="collection-stats">
+          <div>
+            <span class="stat-label">Gesammelte Karten</span>
+            <strong id="total-owned">0</strong>
+          </div>
+          <div>
+            <span class="stat-label">Einzigartige Karten</span>
+            <strong id="unique-owned">0</strong>
+          </div>
+          <div>
+            <span class="stat-label">Vervollständigte Sets</span>
+            <strong id="completed-sets">0</strong>
+          </div>
+        </div>
+        <div class="set-progress-grid" id="collection-grid"></div>
+        <div class="trade-hub" id="trade-hub">
+          <h3>Tauschbörse</h3>
+          <p>
+            Teile deine Duplikate mit Freunden oder suche nach der letzten Karte
+            für dein Lieblings-Set.
+          </p>
+          <ul id="trade-list"></ul>
+        </div>
+      </section>
+
+      <section id="events" class="panel events">
+        <div class="event-card">
+          <h2>Event: Ember Solstice</h2>
+          <p>
+            Wärme und Funken erfüllen die Welt! Sammle limitierte Holos, nur für
+            kurze Zeit erhältlich.
+          </p>
+          <div class="event-details">
+            <div>
+              <span class="stat-label">Countdown</span>
+              <strong id="event-countdown">–</strong>
+            </div>
+            <div>
+              <span class="stat-label">Limitierte Karte</span>
+              <strong id="event-item">–</strong>
+            </div>
+            <div>
+              <span class="stat-label">Bonus</span>
+              <strong>2× Drop-Chance auf Legendäre</strong>
+            </div>
+          </div>
+          <button class="ghost" id="event-pack-btn">Event-Pack öffnen</button>
+        </div>
+      </section>
+
+      <section id="multiplayer" class="panel multiplayer">
+        <div class="panel-header">
+          <h2>Multiplayer-Arena</h2>
+          <p>
+            Tritt gegen andere Sammler an, kanalisiere Lebensessenz-Kristalle und
+            setze deine Karten taktisch ein. Jeder Zug bringt eine neue Karte und
+            einen zusätzlichen Kristall – maximal zehn wie im Hearthstone-Prinzip.
+          </p>
+        </div>
+        <div class="arena-grid">
+          <aside class="duel-overview">
+            <div class="duel-meta">
+              <div>
+                <span class="stat-label">Runde</span>
+                <strong id="duel-round">–</strong>
+              </div>
+              <div>
+                <span class="stat-label">Aktiver Spieler</span>
+                <strong id="duel-active">–</strong>
+              </div>
+            </div>
+            <div class="duel-controls">
+              <button id="duel-start" class="primary">Match starten</button>
+              <button id="duel-end-turn" class="ghost" disabled>Zug beenden</button>
+            </div>
+            <p class="duel-hint">
+              Nach jedem Zug ziehst du eine Karte, erhältst einen Kristall mehr
+              und kannst passende Karten ausspielen. Horte bis zu zehn Kristalle
+              und nutze sie für deine stärksten Artefakte.
+            </p>
+          </aside>
+          <div class="duel-boards">
+            <div class="duel-player" data-duel-player="0">
+              <header class="duel-player-header">
+                <span class="duel-player-name">Sammler Nova</span>
+                <span class="duel-player-status">Bereit</span>
+              </header>
+              <div class="duel-player-stats">
+                <div>
+                  <span class="stat-label">Lebenspunkte</span>
+                  <strong class="duel-health-value">30</strong>
+                </div>
+                <div>
+                  <span class="stat-label">Barriere</span>
+                  <strong class="duel-guard-value">0</strong>
+                </div>
+                <div>
+                  <span class="stat-label">Deck</span>
+                  <strong class="duel-deck-count">0</strong>
+                </div>
+                <div>
+                  <span class="stat-label">Hand</span>
+                  <strong class="duel-hand-count">0</strong>
+                </div>
+              </div>
+              <div class="duel-crystals" aria-label="Lebensessenz-Kristalle"></div>
+              <div class="duel-hand" data-duel-hand="0" role="list" aria-label="Handkarten">
+                <p class="duel-hand-empty">Starte die Arena, um Karten zu ziehen.</p>
+              </div>
+            </div>
+            <div class="duel-player" data-duel-player="1">
+              <header class="duel-player-header">
+                <span class="duel-player-name">Archivjäger Vega</span>
+                <span class="duel-player-status">Bereit</span>
+              </header>
+              <div class="duel-player-stats">
+                <div>
+                  <span class="stat-label">Lebenspunkte</span>
+                  <strong class="duel-health-value">30</strong>
+                </div>
+                <div>
+                  <span class="stat-label">Barriere</span>
+                  <strong class="duel-guard-value">0</strong>
+                </div>
+                <div>
+                  <span class="stat-label">Deck</span>
+                  <strong class="duel-deck-count">0</strong>
+                </div>
+                <div>
+                  <span class="stat-label">Hand</span>
+                  <strong class="duel-hand-count">0</strong>
+                </div>
+              </div>
+              <div class="duel-crystals" aria-label="Lebensessenz-Kristalle"></div>
+              <div class="duel-hand" data-duel-hand="1" role="list" aria-label="Handkarten">
+                <p class="duel-hand-empty">Starte die Arena, um Karten zu ziehen.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="duel-log-wrapper">
+          <h3>Gefechtslog</h3>
+          <ol class="duel-log" id="duel-log" aria-live="polite"></ol>
+        </div>
+      </section>
+
+      <section class="panel roadmap">
+        <h2>Ausblick</h2>
+        <div class="roadmap-grid">
+          <article>
+            <h3>Crafting-Werkstatt</h3>
+            <p>Schmelze Commons zu Rare-Scherben und forme eigene Artefakte.</p>
+          </article>
+          <article>
+            <h3>Co-op Expedition</h3>
+            <p>Schließe dich in Teams zusammen und erobere zeitbegrenzte Dungeons.</p>
+          </article>
+          <article>
+            <h3>Arcade Duelle</h3>
+            <p>Setze deine Lieblingskarten in schnellen Indie-PvP-Matches ein.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2024 Collection Fever – Rare Hunt. Ein liebevoller Indie-Prototyp.</p>
+    </footer>
+  </body>
+</html>
